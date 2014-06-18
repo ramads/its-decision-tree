@@ -1,0 +1,137 @@
+/* 
+    Document   : page_welcome
+    Created on : Jul 9, 2013, 1:01:28 PM
+    Author     : Arin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.container{
+    width: 900px;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    border-right: thin solid rgb(199, 199, 199);
+    border-left: thin solid rgb(199, 199, 199);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-width: medium thin;
+    border-style: none solid;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+/*    background-image: url(../images/background/3681675-932486-blue-frame.jpg);*/
+/*    height: 1000px;*/
+      border-left-style: dashed;
+    border-right-style: dashed;
+/*    background-color: #00d0f2 ;*/
+}
+
+#acces{
+    background-color: #00d0f2;
+    line-height: 30px;
+}
+
+.menu{
+    width: 900px;
+    float: left;
+    background-color: #00d0f2 ;
+    font-size: 9px;
+/*     margin-bottom: 20px; */
+}
+
+.content{
+   width:  900px;
+   background-color: white;
+/*   height: 750px;*/
+   text-align: justify;
+}
+
+.Welcome{
+/*      background-color: bisque;*/
+      margin-top : 80px; 
+      float: top;
+      width: 900px;
+      height: 55px;
+/*      margin-left: 20px;      */
+      font-size: 36px;
+}
+
+#title1{
+    width: 800px;
+/*  background-color: red;*/
+    font: bold 1.3em/1 'trebuchet ms', arial, helvetica; 
+    margin-top: 80px;
+    text-align: center;
+}
+
+.Description{
+/*    background-color: whitesmoke;*/
+    float: bottom;
+    width: 867px;
+/*    height: 450px;  */
+    margin-left: 20px; 
+    font-size: large;
+    margin-bottom: 100px;
+}
+
+.Description table th{
+    height: 50px;
+    width: 200px;
+    background-color: #eee;
+    text-align: center;
+    font-size: 24px;
+}
+
+.Description table{
+    margin-left: 200px;
+}
+
+.Description table th:hover{
+     background-color: #B8F5B1;
+}
+
+.Description table th a{
+    text-decoration: none;
+    
+}
+
+
+.Description ul li{
+    list-style-image: url(../images/icon/accept.png);
+}
+
+.guideAngel{
+    margin-top: 10px;
+    width: 750px;
+    height: 180px;
+  /* background-color: yellow;*/
+}
+
+#angelFace{ 
+/*    margin-top: 20px;*/
+    margin-left: 20px;
+    float: left;
+   
+    height: 150px;
+/*    background-color: bisque; */
+    width: 120px;
+    /*background-image: url(../images/icon/prof1.png);*/
+}
+
+#angleGuidance{
+    float: left;
+    margin-top: 30px;
+    width: 500px;
+    height: 150px;
+/*    background-color: red; */
+    font-family: monospace;
+    font-size: 16px;
+    margin-left: 20px; 
+    text-align:center;
+}

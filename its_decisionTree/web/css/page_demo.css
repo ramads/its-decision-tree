@@ -1,0 +1,95 @@
+/* 
+    Document   : page_report
+    Created on : Jul 9, 2013, 1:01:28 PM
+    Author     : Arin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.container{
+    width: 900px;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    border-right: thin solid rgb(199, 199, 199);
+    border-left: thin solid rgb(199, 199, 199);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-width: medium thin;
+    border-style: none solid;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+/*    background-image: url(../images/background/3681675-932486-blue-frame.jpg);*/
+/*    height: 830px;*/
+/*    background-color: #00d0f2 ;*/
+     border-left-style: dashed;
+    border-right-style: dashed;
+}
+
+.acces{
+    background-color: #00d0f2;
+    line-height: 30px;
+}
+
+.menu{
+    width: 900px;
+    float: left;
+    background-color: #00d0f2 ;
+    font-size: 9px;
+}
+
+.content{
+   width:  900px;
+   background-color: white;
+/*   height: 600px;*/
+}
+
+.report{
+    float: left;
+    width: 300px;
+/*    height: 750px;*/
+/*    background-color: #00d0f2;*/
+    margin-left: 30px;     
+/*    margin-top: 10px;*/
+    float: left;
+    margin-bottom: 50px;
+}
+
+#title1{
+    width: 900px;
+    margin-top: 80px; 
+/*    margin-left: 10px;*/
+    text-align: center; 
+    text-shadow: 5px 5px 5px #FF0000;
+/*      background-color: bisque;*/
+      float: top;
+      height: 55px;
+/*      margin-left: 20px;      */
+      font-size: 36px;
+}
+
+.description{
+    float: left;
+    width: 550px;
+/*    background-color: #B8F5B1;*/
+    font-size: 18px;
+/*    margin-top: 50px;*/
+    margin-left: 20px;
+}
+
+.BN{
+    margin-left: 100px;
+    float: left;
+    width: 800px;
+/*    height: 500px;*/
+/*    background-color:  #B8F5B1;*/
+    font-size: 18px; 
+    font-family: Arial,Helvetica,sans-serif;
+    margin-bottom: 50px;
+}
