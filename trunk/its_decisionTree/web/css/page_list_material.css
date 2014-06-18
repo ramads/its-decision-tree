@@ -1,0 +1,111 @@
+/* 
+    Document   : signUp
+    Created on : Jul 9, 2013, 1:01:28 PM
+    Author     : Arin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.container{
+    width: 900px;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    border-right: thin solid rgb(199, 199, 199);
+    border-left: thin solid rgb(199, 199, 199);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-width: medium thin;
+    border-style: none solid;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+/*    background-image: url(../images/background/3681675-932486-blue-frame.jpg);*/
+/*    height: 3200px;*/
+/*    background-color: aqua;*/
+/*    border-bottom-style: dashed;*/
+    border-left-style: dashed;
+    border-right-style: dashed;
+}
+
+#acces{
+    background-color: #00d0f2;
+    line-height: 30px;
+}
+
+.menu{
+    width: 900px;
+    float: left;
+    background-color: #00d0f2 ;
+    font-size: 9px;
+/*    margin-bottom: 20px; */
+}
+
+.content{
+   width: 900px;
+   background-color: white;
+   height: 3035px;
+/*   background-color: bisque;  */
+/*    border-bottom-style: dashed;*/
+}
+
+.content_left{
+   float: left;
+   width: 290px;
+/*   background-color: greenyellow;*/
+    height: 3100px;
+    border-right-style:dashed;
+}
+
+.content_right{
+   float: right;
+   width: 580px;
+/*   background-color: #B8F5B1;*/
+/*    height: 2975px;*/
+   padding: 10px;
+   text-align: center;
+    font-size: 18px;
+    margin-bottom: 100px;
+}
+
+.material{
+     margin-top: 30px;
+/*        background-color: greenyellow;*/
+}
+
+.result ul{
+    list-style: none;
+}
+
+.matList{
+/*   border-bottom-style: dashed;*/
+/*background-color: greenyellow;*/
+ width: 280px;
+}
+
+.tittle{
+/*    background-color: yellow;*/
+    width: 235px;
+    height:30px;
+/*    background-color: red;*/
+    font-family: 'Times New Roman',Times,serif;
+/*    margin-left: 15px;*/
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.matList ul li{
+    list-style-image: url(../images/icon/open.png);
+    margin-left: 10px;
+}
+
+.matList ul li ul li{
+    list-style-image: url(../images/icon/help.png);
+    width: 185px;
+}
+

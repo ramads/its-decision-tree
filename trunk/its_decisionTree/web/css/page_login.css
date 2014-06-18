@@ -1,0 +1,97 @@
+/* 
+    Document   : page_login
+    Created on : Jul 8, 2013, 2:28:06 PM
+    Author     : Arin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    margin: 0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.5em;
+    width: 100%;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+.container{
+    width: 900px;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    border-right: thin solid rgb(199, 199, 199);
+    border-left: thin solid rgb(199, 199, 199);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-width: none;
+    border-style: none;
+    margin-left: auto;
+/*    margin-top:  20px;*/
+    margin-right: auto;
+/*    background-color: #00d0f2;*/
+    padding: 10px;
+    height: 650px;
+     border-left-style: dashed;
+    border-right-style: dashed;
+}
+
+.acces{
+/*    background-color: #00d0f2;
+    line-height: 35px;
+     width: 900px;*/
+}
+
+.Login{
+    font-size: 13px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+     
+}
+
+.content{
+    padding: 10px 0;
+    width:  900px;
+    height: 410px;
+/*    background-image : url(../images/background/b9.jpg);*/
+}
+
+.desc{
+/*    background-color: red;*/
+    margin-left: 30px;
+    margin-top: 80px;
+    width: 465px;
+    font-size: 18px;
+    float: left;
+/*    font-family: Georgia,'Times New Roman',times,serif;*/
+/*    font-family: Verdana,Arial,Helvetica,sans-serif; */
+   font: bold 1.5em/1 'trebuchet ms', arial, helvetica;
+/*    font-style: inherit;*/
+    text-shadow: 1px 1px 1px blue;
+   font-family: Georgia,'Times New Roman',times,serif;
+}
+
+.signUp{
+/*    background-color: blueviolet;*/
+    font-size: 13px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.FormSignUp{
+    margin-top:20px;   
+    width: 395px;
+    float: left;
+/*    border-style: double;*/
+/*   background-color: #00d0f2;*/
+
+
+}
+
