@@ -6,19 +6,21 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.Vector;
 import model.network.KnowledgeDomain;
 import model.node.Node;
 import model.repository.data.Database;
 import model.repository.dbconnection.QueryToDB;
-import model.network.StudentModel;
+import ta.stc_decisionTree.controller.StudentModel;
+import ta.stc_decisionTree.data.MateriLevel;
 
 /**
  *
  * @author Arin
  */
 public class Pedagogik {
-  QueryToDB q;
+  QueryToDB queryDB;
   public Vector<Node> material; 
   double lowestProb;
   String lowestNode;
@@ -26,7 +28,7 @@ public class Pedagogik {
   boolean checking;
     
     public Pedagogik(){  
-        q= new QueryToDB(Database.NAME);
+        queryDB = new QueryToDB(Database.NAME);
     }
     
     public boolean getBool(String data){
@@ -36,13 +38,12 @@ public class Pedagogik {
     
     public Vector<Boolean> getPretestResultasIsUser(String iduser){  //dipanggil buat test
         Vector<Boolean> result = new Vector<Boolean>();
-        String query= ("select result from "+Database.Table.TABLE_PRETEST_RESULT+" where iduser = '"+iduser+"'");
-        ResultSet rs = q.querySelect(query);
+        String query= ("select result from "+Database.Table.TABLE_PRETEST_RESULT+" where iduser = '"+iduser+"' order by idtype asc");
+        ResultSet rs = queryDB.querySelect(query);
         int i=0;
         try {
             while(rs.next()){
-                String res=rs.getString("result");
-                //System.out.println("Result ="+res);           
+                String res=rs.getString("result");         
                 System.out.print("No."+(i+1)+" Result = ");           
                 result.add(Boolean.valueOf(getBool(res)));               
                 System.out.println(result.elementAt(i));
@@ -54,25 +55,33 @@ public class Pedagogik {
         return result;
      }   
      
-     
+/*     
     public Vector<Node> getWeakFromSM(String idUser){
         StudentModel model = new StudentModel();
         Vector<Boolean> result = getPretestResultasIsUser(idUser);
         return model.getWeakNode(result);
     }
-     
+*/
+    
+    public LinkedList<String> getWeakFromSM(String idUser){
+        StudentModel model = new StudentModel();
+        Vector<Boolean> resultTes = getPretestResultasIsUser(idUser);
+        return model.getWeakMaterial(resultTes);
+    }
+    
     public boolean isUserExist(String iduser){
         String query = "select * from "+Database.Table.TABLE_MATERIAL_OBSERVATION
                 +" where iduser='"+iduser+"'";
         try{
-            ResultSet rs = q.querySelect(query);
+            ResultSet rs = queryDB.querySelect(query);
             return rs.next();
         }catch(SQLException ex){
             System.out.println("Error in method isUserExist because : "+ex.getMessage());
         }
         return false;
     } 
-     
+
+/*    
     public void addWeakToDB(String iduser){
         if(!isUserExist(iduser)){
             String query = "insert into "+Database.Table.TABLE_MATERIAL_OBSERVATION
@@ -84,12 +93,23 @@ public class Pedagogik {
             }
         }
     }
+*/
+    public void addWeakToDB(String idUser){
+        if(!isUserExist(idUser)){
+            String query = "insert into "+Database.Table.TABLE_MATERIAL_OBSERVATION
+                    +" (iduser, lesson_name, observation, flag) values (?,?,?,?)";
+            LinkedList<String> weaks = getWeakFromSM(idUser);
+            for(String lesson_name:weaks){
+                queryDB.insertToDB(idUser, "string", lesson_name, "string", false, "boolean", "weak", "string", query);
+            }
+        }
+    }
     
     public void setDomainObserv(String iduser, KnowledgeDomain domain){
         String query = "select lesson_name, observation from "+Database.Table.TABLE_MATERIAL_OBSERVATION
                 +" where iduser='"+iduser+"'";
         try{
-            ResultSet rs = q.querySelect(query);
+            ResultSet rs = queryDB.querySelect(query);
             while(rs.next()){
                 String lesson_name = rs.getString("lesson_name");
                 boolean observ = rs.getBoolean("observation");
@@ -111,15 +131,15 @@ public class Pedagogik {
                 +" where iduser = '"+idUser+"' and lesson_name = '"+lesson_name+"'";
         String queryAdd = "insert into "+Database.Table.TABLE_MATERIAL_OBSERVATION
                 +" (iduser, lesson_name, observation, flag) "+"Values(?,?,?,?)";
-        ResultSet rs = q.querySelect(querySelect);
+        ResultSet rs = queryDB.querySelect(querySelect);
         try {
             if(rs.next()){
                 oldObserv = rs.getBoolean("observation");
                 if (oldObserv!=observation){
-                    q.insertToDB(observation, "boolean", queryUpdate);
+                    queryDB.insertToDB(observation, "boolean", queryUpdate);
                 }
             }else{
-                q.insertToDB(idUser, "string", lesson_name, "string", observation, "boolean", "weakparent","string", queryAdd);
+                queryDB.insertToDB(idUser, "string", lesson_name, "string", observation, "boolean", "weakparent","string", queryAdd);
             }
         } catch (SQLException ex) {
             System.out.println("Error in updateMatObserv because : "+ex.getMessage());
@@ -131,7 +151,7 @@ public class Pedagogik {
                 +" where iduser='"+iduser+"' and flag='weak'";
         Vector<String> weak = new Vector<String>();
         try{
-            ResultSet rs = q.querySelect(query);
+            ResultSet rs = queryDB.querySelect(query);
             while(rs.next()){
                 weak.add(rs.getString("lesson_name"));
             }
@@ -140,7 +160,8 @@ public class Pedagogik {
         }
         return weak;
     }
-    
+
+/*    
     public String getLearnMaterial(String iduser){   //-------------------------------- sebelum posttest
         lowestProb = 2;
         lowestNode = "";
@@ -172,6 +193,33 @@ public class Pedagogik {
         }
         System.out.println("\n\nProb terkecil pada node "+lowestNode+" dengan prob = "+lowestProb);
         return lowestNode;  
+    }
+*/
+    
+    public String getLearnMaterial(String idUser){
+        String learnMaterial = "";
+        int lowerLevel = 9999;
+        
+        String query = "select lesson_name from "+Database.Table.TABLE_MATERIAL_OBSERVATION
+                +" where iduser='"+idUser+"' and flag='weak'";
+        String[] listLevel = MateriLevel.LIST_LEVEL;
+        ResultSet rs = queryDB.querySelect(query);
+        try {
+            while(rs.next()){
+                for(int i=0;i<listLevel.length;i++){
+                    String nama_materi = rs.getString("lesson_name");
+                    if(nama_materi.equals(listLevel[i])){
+                        if(i<lowerLevel){
+                            lowerLevel = i;
+                            learnMaterial = nama_materi;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error di get learn material: "+ex.getMessage());
+        }
+        return learnMaterial;
     }
     
     public void getProbMinParent(Node node){ //rekursif untuk mencari parent yang prob nya lebih kecil dari th

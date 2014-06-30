@@ -39,12 +39,14 @@
                               <li><a href="PageTutorial.jsp">Home</a></li>
                               <li><a href="PageUserAccount.jsp">My Account</a></li>
                               <li><a href="PageListMaterial.jsp">Material List</a></li>
-                              <% boolean check = dataPretest.getPretestLog(userID); 
-                                  if(check){ %>
+                              <% 
+                                  boolean check = dataPretest.getPretestLog(userID); 
+                                  if(check){ 
+                              %>
                                     <li><a href="#">Report</a></li>
-                                 <%} else{ %>
+                              <%  } else{ %>
                                     <li><a href="Pretest_Notif.jsp">Report</a></li>
-                                <% }  %>
+                              <%  }  %>
                               <li><a href="PagePostTestReport.jsp">Study History</a></li>
                               <li><a href="PageLogOut.jsp">Log Out</a></li>
                           </ul>
@@ -117,7 +119,6 @@
                                 <p id="guidence">Silahkan Pilih '<b>Menu Study History</b>'<br>Untuk Melihat Progres Belajar.</p>                                   
                             <% } %>
                     </div>
-                    
                  </div>
             </div>
             <div style="clear: both "></div>
