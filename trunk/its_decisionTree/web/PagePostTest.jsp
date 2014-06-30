@@ -108,7 +108,8 @@
                                 <td colspan="3">&nbsp;</td>                                                                                               
                             </tr> 
 
-                            <% count++; }
+                            <% count++; 
+                                }
                             } %>
                         </table> 
                             <input type="hidden" name="id" value="<%=idl%>">

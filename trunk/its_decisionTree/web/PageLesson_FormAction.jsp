@@ -17,7 +17,7 @@
 %>
     <jsp:forward page="SignUp_notif.jsp"></jsp:forward>
 <%
-    } 
+    }
 %>
 <html>
     <head>
@@ -29,8 +29,8 @@
         <%  
           Pedagogik pedagogik = new Pedagogik();
           //String result=request.getParameter("result");    
-          String idLesson=request.getParameter("idl");
-          String result=request.getParameter("result")  == null ? "x" : request.getParameter("result");    
+          String idLesson = request.getParameter("idl");
+          String result = request.getParameter("result")  == null ? "x" : request.getParameter("result");    
           //out.println(result);
           //out.println(idLesson);
           // out.println(userID);
@@ -40,7 +40,7 @@
           String lessonName= dataLesson.getLessonName(idLesson);
           String idLearning=idLesson+count+userID;
           
-        if(result.equals("no")){    
+        if(result.equals("no")){
             //update knowledge base setobservation 
             //out.println("set observation = false");
             //out.println("leson name : "+lessonName+" user id : "+userID);
@@ -51,7 +51,6 @@
             
             
             //dataLesson.addWeakKD(lessonName);
-            
             String nextMaterial=pedagogik.getLearnMaterial(userID);
                    
             String idNextMaterial = dataLesson.getIdLessonName(nextMaterial);          
@@ -61,8 +60,8 @@
                 </jsp:forward>  
         <%   }else if (result.equals("doubt")){
         %>
-          <jsp:forward page="PagePostTest.jsp">
-                <jsp:param name="idlearn"  value="<%=idLearning%>" />
+          <jsp:forward page="PagePostTest_STC.jsp">
+                <jsp:param name="count"  value="<%=1%>" />
             </jsp:forward> 
         <% } %>
     </body>

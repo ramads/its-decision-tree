@@ -52,10 +52,13 @@
             <div class="content">
                 <div  class="content_left">
                     <div class="matList">
-                        <%String topic= dataLesson.getTopic(idl); %>                  
+                        <% 
+                            String topic = dataLesson.getTopic(idl); 
+                        %>                  
                         <ul>
                             <li><div class="tittle"><b><%=topic %></b></div>
-                            <% ResultSet rs = dataLesson.getIDsubLesson(idl);
+                            <% 
+                                ResultSet rs = dataLesson.getIDsubLesson(idl);
                                 if(rs!=null){       
                                     while(rs.next()){      
                                         String IdSubles=new String(rs.getString("idsublesson"));
@@ -65,8 +68,10 @@
                                 <li><a href="PageLesson.jsp?data=<%=IdSubles%>"> <%= dataLesson.getsubLesson(IdSubles)%> </a></li> 
                                 </ul>
 
-                            <%      } 
-                            } %>
+                            <%      
+                                    } 
+                                } 
+                            %>
                             </li>
                         </ul>
                        
