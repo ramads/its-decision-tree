@@ -16,6 +16,7 @@ public class Database{
         public static final String TABLE_DATA_USER = "datauser";
         public static final String TABLE_PRETEST_QUESTION = "pretestquestion";
         public static final String TABLE_PRETEST_RESULT = "pretestresult";
+        public static final String TABLE_POSTTEST_RESULT = "posttest_result";
         public static final String TABLE_PRETEST_LOG = "pretestlog";
         public static final String TABLE_QUESTIONS = "questions";
         public static final String TABLE_LESSON= "lesson";

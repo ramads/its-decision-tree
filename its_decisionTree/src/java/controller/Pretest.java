@@ -6,11 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
-import model.network.KnowledgeDomain;
-import model.node.Node;
 import model.repository.data.Database;
 import model.repository.dbconnection.QueryToDB;
-import model.network.StudentModel;
 
 /**
  *

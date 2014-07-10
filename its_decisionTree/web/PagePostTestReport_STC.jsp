@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : PagePostTestReport
     Created on : Sep 3, 2013, 11:18:02 AM
     Author     : Arin
@@ -18,7 +18,8 @@
     <jsp:forward page="SignUp_notif.jsp"></jsp:forward>
 <%
     }
- int count=1; 
+    String idCourseMat = "";
+    int count=1; 
 %>
 <html>
     <head>
@@ -27,6 +28,7 @@
         <link href="css/templete.css" rel="stylesheet" type="text/css"/>
         <link href="css/page_posttest_report.css" rel="stylesheet" type="text/css"/>
         <jsp:useBean id="dataPretest" class="controller.Pretest" scope="session"/>    
+        <jsp:useBean id="dataPosttest" class="controller.PostTest" scope="session"/>    
         <jsp:useBean id="dataLesson" class="controller.Lesson" scope="session"/>    
     </head>
     <body>      
@@ -54,74 +56,74 @@
             <div class="content">
                 <h2 id="title1"><marquee onmouseover="this.stop()" onmouseout="this.start()" width="80%" scrollamount="3" behavior="alternate">Laporan Progres Belajar User "<%= userID %>"</marquee></h2>
                 <div class="report">    
-                    <form method="post" action="PageReport.jsp">
-                        <table border="1" style=" text-align: center;" bgColor="black">
-                            <tr bgColor="palevioletred">                              
-                                <th width="10px">No.</th>                                                         
-                                <th width="270px">Materi</th>                              
-                                <th width="100px">Hasil Posttest</th>                                                                                        
+                    <form method="post" action="PagePostTestReport_STC.jsp">
+                        <table border="1" style=" text-align: center; ">
+                            <tr bgColor="#00d0f2">                              
+                                <th width="50">No Soal</th>                              
+                                <th width="150">Hasil Posttest Terakhir</th>                                                                                        
                             </tr>
-                            <%     // String pageR = (request.getParameter("page"));
-                                   // if (pageR==null) pageR="1";
-                                   Pedagogik pedagogik = new Pedagogik();
-                                   String idCourseMat="";
-                                    ResultSet rs = dataLesson.getIdCourseMaterial(userID);
+                                <%                                     
+                                    ResultSet rs = dataPosttest.getLastPostResult(userID);
                                     if(rs!=null){
-                                        idCourseMat="";
                                         while(rs.next()){                                    
-                                        //String id=new String(rs.getString("iduser"));                                                                                                                        
+                                        //String id=new String(rs.getString("iduser"));  
                                         String bagroundcolor="";
-                                        idCourseMat=new String(rs.getString("idcoursemat"));
-                                        String lesson = dataLesson.getCourseMaterial(idCourseMat);
-                                        String result = dataLesson.getCourseMaterialResult(idCourseMat);
-                                        
+                                        String result=new String(rs.getString("result")); 
                                             if(result.equals("0")){
-                                                result="Tidak Mengerti";
+                                                result="salah";
                                                 bagroundcolor="#FF9F9F";
                                             }if(result.equals("1")){
-                                                result="Mengerti";
+                                                result="benar";
                                                 bagroundcolor="#9dfdee";
-                                            }  
-                                        %>
-                                        <tr  bgColor="<%=bagroundcolor %>">                                    
-                                            <td width="70" ><%= count%>.</td>                                             
-                                            <td width="70" ><%= lesson%></td>                       
-                                            <td width="100"><%= result %></td>  
-                                        </tr>
-                                        
-                                        <% count++; } 
-                                    if (idCourseMat.equals("")){
-                                            //out.println("masuk");
-                                        %>
-                                        <ul id="warning">
-                                             <li style="list-style-image: url(images/icon/warning2.png)"><font color="red"><b>WARNING </b></font></li>
-                                             <li style="list-style: none ">Anda belum pernah melakukan Posttest</li>
-                                        </ul> 
-                                        <%
-                                        }
-                                    }  %>                                              
-                       </table>
+                                            }                                             
+                                %>
+                              <tr  bgColor="<%=bagroundcolor %>">                                    
+                                    <td width="70" ><%= count  %></td>                       
+                                    <td width="100"><%= result %></td>  
+                              </tr>
+                                        <% count++; 
+                                        } 
+                                    } 
+                                %>
+                        </table>
                     </form>
                 </div>
                  <div class="guideAngel">   
                           <div id="angelFace"></div>
                            <div id="angleGuidance">
-                               <%  if(idCourseMat.equals("")){
-                                   %>
-                                   <p id="guidence" style="margin-top : 50px;">Silahkan Posttest terlebih Dahulu</p>
-                               <%}else{
-                                    String nextMaterial=pedagogik.getLearnMaterial(userID);
-
-                                    if(nextMaterial.equals("")){                                              
-                                        %>    
+                               <%
+                                   Pedagogik pedagogik = new Pedagogik();
+                                   
+                                   //lakukan update weak material setelah posttest
+                                   pedagogik.updateWeakMaterial(userID);
+                                   
+                                   //ambil materi yang akan dipelajari selanjutnya berdasarkan hasil posttest
+                                   String nextMaterial=pedagogik.getLearnMaterial(userID);
+                               %>
+                                   Dari Hasil Posttes Anda Lemah Pada Materi Mengenai :
+                               <%  ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
+                                        if(rs2!=null){
+                                            String weakMaterial="";
+                                            while(rs2.next()){ 
+                                                weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ %>
+                                    <ul>
+                                        <li style="list-style-image: url(images/icon/warning.png)"><%= dataLesson.getTopicBaseOnLessonName(weakMaterial)%></li>
+                                    </ul>
+                               <%           }
+                                   
+                                   //jika sudah tidak ada materi yang dipelajari maka user telah selesai belajar
+                                   if(nextMaterial.equals("")){                                              
+                               %>    
                                         <p  id="guidence">Dari Hasil test Anda Dikatakan Telah Tamat Belajar. <br><h1>LULUS.....!!</h1></p>
 
-                                    <% }else{ 
+                               <% 
+                                   }else{ 
                                             String topic=dataLesson.getTopicBaseOnLessonName(nextMaterial);
                                         %>
                                         <p  id="guidence">Selanjutnya Materi yang harus anda pelajari adalah :<br><b><a href="PageLesson.jsp?data=<%=dataLesson.getIdLessonName(nextMaterial) %>"> <%=topic%></b></a></p>
-                                    <% } 
-                               }%>
+                               <% 
+                                   } 
+                               %>
                            </div>
                  </div>
             </div> 

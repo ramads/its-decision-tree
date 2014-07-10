@@ -62,7 +62,8 @@
                                 <th width="50">No Soal</th>                              
                                 <th width="150">Hasil Pretest</th>                                                                                        
                             </tr>
-                                <%  Pedagogik pedagogik = new Pedagogik();                                   
+                                <%  
+                                    Pedagogik pedagogik = new Pedagogik();                                   
                                     for (int i=0; i<15; i++){
                                     String idPretest=userID+(i+1);
                                     ResultSet rs = dataPretest.getPResult(idPretest);
@@ -78,14 +79,15 @@
                                                 result="benar";
                                                 bagroundcolor="#9dfdee";
                                             }                                             
-                                        %>
-                                        <tr  bgColor="<%=bagroundcolor %>">                                    
-                                            <td width="70" ><%= count%></td>                       
-                                            <td width="100"><%= result %></td>  
-                                        </tr>
-                                        <% count++; } 
+                                %>
+                              <tr  bgColor="<%=bagroundcolor %>">                                    
+                                    <td width="70" ><%= count  %></td>                       
+                                    <td width="100"><%= result %></td>  
+                              </tr>
+                                        <% count++; 
+                                        } 
                                     } 
-                                  }%>
+                                }%>
                         </table>
                     </form>
                 </div>

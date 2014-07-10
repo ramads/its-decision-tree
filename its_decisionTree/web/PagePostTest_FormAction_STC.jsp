@@ -31,32 +31,43 @@
     <body>
         <%  
            char answer[]={'A','B','C','D'};
-          
            String corectAns=""; 
            int count = Integer.parseInt(request.getParameter("count"));
+           
+           // cek apakah ada posttest terakhir yang tidak selesai
+           if(count==1){
+               try{
+                    dataPosttest.cekLastPostTest(userID);
+               }catch(Exception e){}
+           }
+           // id topik
            String idT=request.getParameter("idT");
+           
+           // id question
            String idQ=request.getParameter("idQ");
            
-           String userAns=request.getParameter("ans")  == null ? "x" : request.getParameter("ans");
+           // jawaban dari user
+           String userAns = request.getParameter("ans")  == null ? "x" : request.getParameter("ans");
            
+           // kunci jawaban soal
            ResultSet rs = dataPretest.getDBKey(Integer.parseInt(idT), Integer.parseInt(idQ));
             if(rs!=null){
                 while(rs.next()){
-                    corectAns=new String(rs.getString("corectAns"));  
+                    corectAns = new String(rs.getString("corectAns"));  
                 }
             }
-            
+            boolean result = true;
            //jika jawaban user benar  
            if(userAns.equals(corectAns)){
-               //dataPretest.pretestResult.add(idT+";"+idQ+";"+userAns+";"+"true");
-              
+              result = true;
            
            //jika jawaban user salah
            }else {
               if(userAns.equals("")) userAns="x"; 
-              //dataPretest.pretestResult.add(idT+";"+idQ+";"+userAns+";"+"false");
-                              
+              result = false;  
            }
+           String idCourse = dataPosttest.getLastIdCourse(userID);
+           dataPosttest.addPosttestResult(userID, idCourse, Integer.parseInt(idT), Integer.parseInt(idQ), userAns, result);
            count++;
            
            if(Integer.parseInt(idT)<15){
@@ -66,7 +77,7 @@
                 </jsp:forward>           
              <%  } else{ %>
                 <jsp:forward page="PagePostTestReport_STC.jsp">
-                    <jsp:param name="data"  value="<%=userID %>" />
+                    <jsp:param name="data" value="<%=userID %>" />
                 </jsp:forward>
           <% } %>  
     </body>

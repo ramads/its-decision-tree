@@ -15,7 +15,7 @@ import ta.stc_decisionTree.model.MateriPretest;
 public class StudentModel {
     MateriPretest[] materiPretest;
     LinkedList<String> weakMaterial = new LinkedList<>();
-    private LinkedList<DecisionTree> dTreeList;
+    private LinkedList<DecisionTree> dTreeList = new LinkedList<DecisionTree>();
     
     public StudentModel(){
         System.out.println("Konstruktor kepanggil");
@@ -28,20 +28,25 @@ public class StudentModel {
         }
     }
     
+    /**
+     * memetakan hasil jawaban pretes user ke masing2 materi (B, S, K)
+     * @param hasilJawaban jawaban2 pretes user
+     */
     private void createStudentModel(Vector<Boolean> hasilJawaban){
         double range;
         double rangePoint;
         try{
-        setHasilPretest(hasilJawaban);
+            //
+            setHasilPretest(hasilJawaban);
         }catch(Exception e){
             System.out.println("Exception createStudentModel: "+e.getMessage());
         }
         for(MateriPretest mPretest:materiPretest){
             double jmlBenar = mPretest.jumlahBenar;
             double totSoal = mPretest.totalSoal;
-            if(jmlBenar>=(totSoal/2.0)){
-                weakMaterial.add(mPretest.materi);
-            }
+//            if(jmlBenar>=(totSoal/2.0)){
+//                weakMaterial.add(mPretest.materi);
+//            }
             if(RuleNilai.getVariasi()==RuleNilai.VARIASI_PERTAMA){
                 range = 2.0;
                 rangePoint = totSoal/range;
@@ -81,8 +86,10 @@ public class StudentModel {
             String[] inputPrediksi = getInputPrediksi(dTree);
             String hasilPrediksi = dTree.predictTargetAttributeValue(inputPrediksi);
             System.out.println("Hasil Prediksi: "+hasilPrediksi);
-            if(hasilPrediksi!=null){
+            if(hasilPrediksi!=null && !hasilPrediksi.isEmpty()){
                 if(RuleNilai.ubahStringKeNilai(hasilPrediksi)==RuleNilai.TIDAK_LULUS){
+                    System.out.println("weak material");
+                    System.out.println("========================================");
                     weakMaterial.add(dTree.tabelTree.getTarget());
                 }
             }
@@ -106,17 +113,31 @@ public class StudentModel {
         return inputPrediksi;
     }
     
+    /**
+     * mengeset hasil jawaban pretes user ke objek MateriPretes untuk mempermudah
+     * pemetaan hasil pretes ke masing2 materi. pada fungsi ini akan di hitung
+     * berapa soal yg muncul untuk masing2 materi dan menghitung berapa jumlah
+     * benar dan salahnya
+     * @param hasilJawaban hasil jawaban pretes user
+     */
     private void setHasilPretest(Vector<Boolean> hasilJawaban){
+        //set type soal
         LinkedList<String[]> listTypeSoal = RuleTypeSoal.LIST_TYPE_SOAL();
-        System.out.println("hasilJawaban: "+hasilJawaban.size());
+        
+        //untuk masing2 soal (no 1 sampai 15) pretes atau masing2 list type soal
         for(int i=0;i<hasilJawaban.size();i++){
+            //ambil materi2 yang menyusun type soal
             String[] listMateri = listTypeSoal.get(i);
+            //untuk semua materi yg ada pada type soal
             for(String str:listMateri){
+                //untuk semua materi yg ada
                 for(MateriPretest mPretest:materiPretest){
+                    //jika
                     if(mPretest.materi.equals(str)){
-                        mPretest.totalSoal++;
+                        mPretest.totalSoal++;       //increment total soal untuk materi
+                        //jika jawaban pretes benar
                         if(hasilJawaban.get(i)){
-                            mPretest.jumlahBenar++;
+                            mPretest.jumlahBenar++; //increment jumlah benar untuk materi
                         }
                     }
                 }
@@ -124,6 +145,7 @@ public class StudentModel {
         }
     }
     
+    //convert array ke llinkedlist
     private LinkedList arrayToLinkedList(Object[] arr){
         LinkedList list = new LinkedList();
         for(Object o : arr){

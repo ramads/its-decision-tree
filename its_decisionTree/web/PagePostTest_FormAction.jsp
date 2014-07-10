@@ -61,7 +61,7 @@
                 }                                          
             }
         } 
-      int counter=dataLesson.getTotalLearn(userID,idl);  
+     int counter=dataLesson.getTotalLearn(userID,idl);  
      String idLearning=idl+counter+userID;
          //out.print("Total Jawaban benar = "+count);
          //out.println("########################################################################## = "+nodeName);
