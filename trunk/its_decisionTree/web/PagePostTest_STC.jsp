@@ -17,11 +17,7 @@
     <jsp:forward page="SignUp_notif.jsp"></jsp:forward>
 <%
     } 
-%>
-<% int count= Integer.parseInt(request.getParameter("count")); 
-    if(count==0){
-        count=1;
-    }
+    int count= Integer.parseInt(request.getParameter("count"));
 %>
 
 <html>
@@ -54,7 +50,7 @@
             <div class="content"> 
                 <div class="Questions">                      
                         <h2>Pilih salah satu jawaban yang menurut anda benar</h2>
-                        <form id="Form"  name="Form" method="post" action="PagePostTest_FormAction.jsp" onsubmit="<% if (count==15){%> alert('Soal sudah habis, Silahkan Lihat Hasil Pretest Anda') <% } %>">
+                        <form id="Form"  name="Form" method="post" action="PagePostTest_FormAction_STC.jsp" onsubmit="<% if (count==15){%> alert('Soal sudah habis, Silahkan Lihat Hasil Pretest Anda') <% } %>">
                         <h4>Soal ke-<%=count%></h4>
                         <table border=0 >                             
                             <tr>    
@@ -117,7 +113,7 @@
                                 alert("belum dicentang, centang dulu!!!"); 
                                 return false; 
                             } 
-                            window.location = "PagePretest.jsp"; 
+                            window.location = "PagePostTest_STC.jsp"; 
                         } 
                     </script>    
                 </div>

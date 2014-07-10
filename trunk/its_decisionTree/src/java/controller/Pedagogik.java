@@ -36,6 +36,11 @@ public class Pedagogik {
          return true;
     }
     
+    /**
+     * mendapatkan hasil jawaban pretest user
+     * @param iduser
+     * @return 
+     */
     public Vector<Boolean> getPretestResultasIsUser(String iduser){  //dipanggil buat test
         Vector<Boolean> result = new Vector<Boolean>();
         String query= ("select result from "+Database.Table.TABLE_PRETEST_RESULT+" where iduser = '"+iduser+"' order by idtype asc");
@@ -43,17 +48,36 @@ public class Pedagogik {
         int i=0;
         try {
             while(rs.next()){
-                String res=rs.getString("result");         
-                System.out.print("No."+(i+1)+" Result = ");           
-                result.add(Boolean.valueOf(getBool(res)));               
-                System.out.println(result.elementAt(i));
+                String res=rs.getString("result");          
+                result.add(Boolean.valueOf(getBool(res)));
                 i++;
             }
         } catch (SQLException ex) {
             System.out.println("Error in getPretestResultasIsuer because: "+ex.getMessage());
         }
         return result;
-     }   
+     }
+    
+    /**
+     * mendapatkan hasil jawaban postest terakhir user
+     * @param idUser
+     * @return 
+     */
+    public Vector<Boolean> getPostTestResult(String idUser){
+        PostTest postTest = new PostTest();
+        Vector<Boolean> result = new Vector<Boolean>();
+        String idCourse = postTest.getLastIdCourse(idUser);
+        String query = "select result from "+Database.Table.TABLE_POSTTEST_RESULT
+                +" where idCourse='"+idCourse+"' order by idType limit 0,15";
+        ResultSet rs = queryDB.querySelect(query);
+        try{
+            while(rs.next()){
+                String res = rs.getString("result");
+                result.add(Boolean.valueOf(getBool(res)));
+            }
+        }catch(SQLException e){}
+        return result;
+    }
      
 /*     
     public Vector<Node> getWeakFromSM(String idUser){
@@ -63,10 +87,26 @@ public class Pedagogik {
     }
 */
     
+    /**
+     * mendapatkan weak material setelah user melakukan pretest
+     * @param idUser
+     * @return 
+     */
     public LinkedList<String> getWeakFromSM(String idUser){
         StudentModel model = new StudentModel();
         Vector<Boolean> resultTes = getPretestResultasIsUser(idUser);
         return model.getWeakMaterial(resultTes);
+    }
+    
+    /**
+     * mendapatkan weak material setelah user melakukan posttest
+     * @param idUser
+     * @return 
+     */
+    public LinkedList<String> getWeakAfterPostTest(String idUser){
+        StudentModel model = new StudentModel();
+        Vector<Boolean> resultPosttest = getPostTestResult(idUser);
+        return model.getWeakMaterial(resultPosttest);
     }
     
     public boolean isUserExist(String iduser){
@@ -100,8 +140,27 @@ public class Pedagogik {
                     +" (iduser, lesson_name, observation, flag) values (?,?,?,?)";
             LinkedList<String> weaks = getWeakFromSM(idUser);
             for(String lesson_name:weaks){
+                System.out.println("insert weak: "+lesson_name);
                 queryDB.insertToDB(idUser, "string", lesson_name, "string", false, "boolean", "weak", "string", query);
             }
+        }
+    }
+    
+    /**
+     * fungsi untuk memperbaharui weak material setelah posttest
+     * @param idUser 
+     */
+    public void updateWeakMaterial(String idUser){
+        //query delete materi observasi sebelumnya
+        String deleteLast = "delete from "+Database.Table.TABLE_MATERIAL_OBSERVATION+" where iduser='"+idUser+"'";
+        queryDB.executeQuery(deleteLast);
+
+        //query insert daftar weak material setelah posttest
+        String query = "insert into "+Database.Table.TABLE_MATERIAL_OBSERVATION
+                +" (iduser, lesson_name, observation, flag) values (?,?,?,?)";
+        LinkedList<String> weaks = getWeakAfterPostTest(idUser);
+        for(String lesson_name:weaks){
+            queryDB.insertToDB(idUser, "string", lesson_name, "string", false, "boolean", "weak", "string", query);
         }
     }
     

@@ -27,42 +27,38 @@
     </head>
     <body>
         <%  
-          Pedagogik pedagogik = new Pedagogik();
-          //String result=request.getParameter("result");    
+          
+          // id materi yang terakhir diajarkan
           String idLesson = request.getParameter("idl");
-          String result = request.getParameter("result")  == null ? "x" : request.getParameter("result");    
-          //out.println(result);
-          //out.println(idLesson);
-          // out.println(userID);
+          String result = request.getParameter("result")  == null ? "x" : request.getParameter("result");
             
           if (result.equals("x")) out.println("<h1>Silahkan Kembali dan pilih salah satu hasil blajar anda.............................!!</h1>");
-          int count=dataLesson.getTotalLearn(userID,idLesson);  
+          
+          // total berapa kali sudah belajar
+          int count=dataLesson.getTotalLearn(userID,idLesson);
+          
+          // nama materi berdasarkan id materi yang telah diambil
           String lessonName= dataLesson.getLessonName(idLesson);
+          
+          // id learning -> id yang bakal disimpan kedatabase
           String idLearning=idLesson+count+userID;
           
         if(result.equals("no")){
-            //update knowledge base setobservation 
-            //out.println("set observation = false");
-            //out.println("leson name : "+lessonName+" user id : "+userID);
-            pedagogik.updateMatObserv(userID, lessonName, false);
             dataLesson.addCourseMaterial(idLearning, userID, idLesson, false);
             
-            //out.println("nodeName = "+lessonName);
-            
-            
-            //dataLesson.addWeakKD(lessonName);
-            String nextMaterial=pedagogik.getLearnMaterial(userID);
-                   
-            String idNextMaterial = dataLesson.getIdLessonName(nextMaterial);          
+            // penentuan materi selanjutnya yang akan diajarkan jika materi yang di
+            // ajarkan sebelumnya tidak dimengerti
+          
         %>
             <jsp:forward page="PagePostTestReport.jsp">
                    <jsp:param name="data"  value="<%=userID %>" />
                 </jsp:forward>  
-        <%   }else if (result.equals("doubt")){
+        <% }else if (result.equals("doubt")){
+            dataLesson.addCourseMaterial(idLearning, userID, idLesson, true);
         %>
           <jsp:forward page="PagePostTest_STC.jsp">
-                <jsp:param name="count"  value="<%=1%>" />
-            </jsp:forward> 
+              <jsp:param name="count"  value="<%=1%>" />
+          </jsp:forward> 
         <% } %>
     </body>
 </html>
