@@ -76,6 +76,8 @@ public class PostTest {
         try{
             if(rs2.next()){
                 jml = rs2.getInt("jml");
+            }else{
+                jml = 0;
             }
         } catch(SQLException e){}
         if (jml!=15){

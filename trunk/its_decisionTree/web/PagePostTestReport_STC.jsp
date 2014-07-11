@@ -100,30 +100,27 @@
                                    //ambil materi yang akan dipelajari selanjutnya berdasarkan hasil posttest
                                    String nextMaterial=pedagogik.getLearnMaterial(userID);
                                %>
-                                   Dari Hasil Posttes Anda Lemah Pada Materi Mengenai :
+                                   Dari Hasil Posttest Anda Lemah Pada Materi Mengenai :
                                <%  ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
-                                        if(rs2!=null){
-                                            String weakMaterial="";
-                                            while(rs2.next()){ 
-                                                weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ %>
-                                    <ul>
-                                        <li style="list-style-image: url(images/icon/warning.png)"><%= dataLesson.getTopicBaseOnLessonName(weakMaterial)%></li>
-                                    </ul>
-                               <%           }
-                                   
-                                   //jika sudah tidak ada materi yang dipelajari maka user telah selesai belajar
-                                   if(nextMaterial.equals("")){                                              
-                               %>    
-                                        <p  id="guidence">Dari Hasil test Anda Dikatakan Telah Tamat Belajar. <br><h1>LULUS.....!!</h1></p>
-
-                               <% 
-                                   }else{ 
-                                            String topic=dataLesson.getTopicBaseOnLessonName(nextMaterial);
-                                        %>
-                                        <p  id="guidence">Selanjutnya Materi yang harus anda pelajari adalah :<br><b><a href="PageLesson.jsp?data=<%=dataLesson.getIdLessonName(nextMaterial) %>"> <%=topic%></b></a></p>
-                               <% 
-                                   } 
-                               %>
+                            if(rs2!=null){
+                                String weakMaterial="";
+                                while(rs2.next()){ 
+                                    weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ %>
+                        <ul>
+                            <li style="list-style-image: url(images/icon/warning.png)"><%= dataLesson.getTopicBaseOnLessonName(weakMaterial)%></li>
+                        </ul>
+                            <% }
+                                if(weakMaterial.equals("")){
+                                    out.print("(kosong)<br><br>Anda Dikatakan Telah Tamat Belajar. <h1>LULUS....!!</h1>");
+                                }else{
+                                  %>
+                                  <p id="guidence" style="margin-top: 20px;"><font color="red">"Silahkan Klik "<a href="PageLesson.jsp?data=<%= dataLesson.getIdLessonName(nextMaterial) %> "><b>Belajar</b></a>"</font></p>
+                                 <%
+                                }                    
+                            }if (dataPosttest.hadPostest(userID)){%>
+                                Atau : <br>
+                                <p id="guidence">Silahkan Pilih '<b>Menu Study History</b>'<br>Untuk Melihat Progres Belajar.</p>                                   
+                            <% } %>
                            </div>
                  </div>
             </div> 

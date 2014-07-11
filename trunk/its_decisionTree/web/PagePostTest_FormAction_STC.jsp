@@ -35,11 +35,13 @@
            int count = Integer.parseInt(request.getParameter("count"));
            
            // cek apakah ada posttest terakhir yang tidak selesai
-           if(count==1){
-               try{
-                    dataPosttest.cekLastPostTest(userID);
-               }catch(Exception e){}
-           }
+//           if(count==1){
+//               try{
+//                    dataPosttest.cekLastPostTest(userID);
+//               }catch(Exception e){
+//                   System.out.println("error: "+e.getMessage());
+//               }
+//           }
            // id topik
            String idT=request.getParameter("idT");
            

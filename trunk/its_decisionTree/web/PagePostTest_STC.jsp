@@ -50,7 +50,7 @@
             <div class="content"> 
                 <div class="Questions">                      
                         <h2>Pilih salah satu jawaban yang menurut anda benar</h2>
-                        <form id="Form"  name="Form" method="post" action="PagePostTest_FormAction_STC.jsp" onsubmit="<% if (count==15){%> alert('Soal sudah habis, Silahkan Lihat Hasil Pretest Anda') <% } %>">
+                        <form id="Form"  name="Form" method="post" action="PagePostTest_FormAction_STC.jsp" onsubmit="<% if (count==15){%> alert('Soal sudah habis, Silahkan Lihat Hasil Posttest Anda') <% } %>">
                         <h4>Soal ke-<%=count%></h4>
                         <table border=0 >                             
                             <tr>    

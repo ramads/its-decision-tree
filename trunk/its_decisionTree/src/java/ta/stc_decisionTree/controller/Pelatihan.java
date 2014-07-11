@@ -2,6 +2,7 @@ package ta.stc_decisionTree.controller;
 
 import java.util.LinkedList;
 import ta.stc_decisionTree.model.DecisionTree;
+import ta.stc_decisionTree.model.MateriInference;
 import ta.stc_decisionTree.model.TabelTree;
 
 /**
@@ -15,6 +16,7 @@ public class Pelatihan {
     //daftar atribut materi (atribut target dan non target)
     LinkedList<String> daftarMateri;
     
+    LinkedList<MateriInference> materiInference;
     //objek untuk memproses tabel tree
     ProsesTabelTree pTree;
     
@@ -32,8 +34,13 @@ public class Pelatihan {
         this.daftarMateri = daftarMateri;
     }
     
+    public void setMateriInference(LinkedList<MateriInference> mi){
+        materiInference = mi;
+    }
+    
     /**
-     * fungsi untuk mendapatkan decision tree yang dibuat
+     * fungsi untuk mendapatkan decision tree yang dibuat 
+     * tanpa menggunakan keterkaitan antar materi (semua materi digunakan sebagai atribut)
      * @param prosesTes hasil tes dari mahasiswa yang didapat dari workshop harian
      * @return daftar decision tree sebanyak target yang ditentukan
      */
@@ -60,6 +67,25 @@ public class Pelatihan {
     }
     
     /**
+     * fungsi untuk membuat decision tree yang 
+     * dibuat berdasarkan materi inference (keterkaitan antar materi)
+     * @param prosesTes
+     * @return 
+     */
+    public LinkedList<DecisionTree> buatDecisionTreeInference(ProsesTes prosesTes){
+        LinkedList<DecisionTree> daftarDTree = new LinkedList<>();
+        pTree = new ProsesTabelTree(prosesTes.ambiHasilTes());
+        for(MateriInference mInference : materiInference){
+            pTree.setTargetAtribut(mInference.targetMateri);
+            pTree.setDaftarAtribut(mInference.materiInference);
+            TabelTree tabelTree = pTree.buatTabelTree();
+            DecisionTree tree = id3.runAlgorithm(tabelTree);
+            daftarDTree.add(tree);
+        }
+        return daftarDTree;
+    }
+    
+    /**
      * untuk mengecek apakah target terdapat dalah daftar materi
      * jika tidak ada pelatihan tidak bisa diproses
      * @param dTarget daftar target
@@ -80,6 +106,4 @@ public class Pelatihan {
         }
         return valid;
     }
-    
-    
 }

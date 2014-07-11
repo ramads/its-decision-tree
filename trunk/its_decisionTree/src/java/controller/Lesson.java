@@ -6,14 +6,10 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.network.KnowledgeDomain;
-import model.node.Node;
 import model.repository.data.Database;
 import model.repository.dbconnection.QueryToDB;
-import model.network.StudentModel;
 
 /**
  *
@@ -27,7 +23,7 @@ public class Lesson {
     }
     
     
-    public ResultSet selectWeakFromDB(String idu, String flag) throws SQLException{
+    public ResultSet selectWeakFromDB(String idu, String flag){
         String query= ("select lesson_name from "+Database.Table.TABLE_MATERIAL_OBSERVATION+" where iduser = '"+idu+"' AND observation = "+false+" AND flag = '"+flag+"'");
         ResultSet rs = q.querySelect(query);    
         return rs;
