@@ -115,8 +115,7 @@
                                   <p id="guidence" style="margin-top: 20px;"><font color="red">"Silahkan Klik "<a href="PageLesson.jsp?data=<%= dataLesson.getIdLessonName(lesName) %> "><b>Belajar</b></a>"</font></p>
                                  <%
                                 }                    
-                            }
-                            if (dataPosttest.hadPostest(userID)){%>
+                            }if (dataPosttest.hadPostest(userID)){%>
                                 Atau : <br>
                                 <p id="guidence">Silahkan Pilih '<b>Menu Study History</b>'<br>Untuk Melihat Progres Belajar.</p>                                   
                             <% } %>
