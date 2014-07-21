@@ -7,7 +7,7 @@ import ta.stc_decisionTree.data.Database;
  * @author rama
  */
 public class SQL {
-    public static final String AMBIL_SEMUA_TES_HARIAN = "select * from "+Database.Tabel.WORKSHOP_TES_HARIAN;
+    public static final String AMBIL_SEMUA_TES_HARIAN = "select * from "+Database.Table.TABLE_DAILYTEST;
     public static final String AMBIL_TYPE = "";
     public static final String AMBIL_MATERI = "";
     public static final String AMBIL_SOAL = "";

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
-import model.repository.data.Database;
+import ta.stc_decisionTree.data.Database;
 import model.repository.dbconnection.QueryToDB;
 
 /**
