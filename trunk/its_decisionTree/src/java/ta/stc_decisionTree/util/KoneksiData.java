@@ -16,7 +16,7 @@ import ta.stc_decisionTree.data.Database;
 public class KoneksiData {
     private boolean nothing_error=true;
     private String comment;
-    private String url = "jdbc:mysql://localhost/"+Database.NAMA_DATABASE;
+    private String url = "jdbc:mysql://localhost/"+Database.NAME;
     
     //constructor
     public KoneksiData (){}

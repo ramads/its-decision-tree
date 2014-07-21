@@ -6,7 +6,7 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.repository.data.Database;
+import ta.stc_decisionTree.data.Database;
 import model.repository.dbconnection.QueryToDB;
 
 /**
