@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 import ta.stc_decisionTree.data.Database;
-import model.repository.dbconnection.QueryToDB;
+import ta.stc_decisionTree.util.QueryToDB;
 
 /**
  *
@@ -29,19 +29,24 @@ public class Pretest {
         q= new QueryToDB(Database.NAME);
         idType=1;  
     }
-    
+    /*
+    mengeset id soal
+    */
     public void setIdQuestion(int idT) {
        idQuestion=rand(idT);
     }
     
-     public int getIdQuestion() {
+    //mengambil id soal yang telah di set
+    public int getIdQuestion() {
         return idQuestion;
     }
 
+    //mengeset id type soal
     public void setIdType(int idType) {
         this.idType = idType;
     }
     
+    //mengambil id soal yang telah di set
     public int getIdType() {
         return idType;
     }
@@ -53,7 +58,10 @@ public class Pretest {
     public void setLocation(String location) {
         this.location = location;
     }
-       
+   
+   /*
+    berfungsi untuk mengambil soal dari database sesuai dengan type soal
+    */
    public String getQuestion(int idType, int idQuest) throws SQLException{           
        String query= ("select question from  "+Database.Table.TABLE_PRETEST_QUESTION+" where idtype = '"+idType+"' AND idquest = '"+idQuest+"'");
        ResultSet rs = q.querySelect(query);
@@ -63,6 +71,15 @@ public class Pretest {
          return question;
     }
      
+   
+   /**
+    * mengecek hasil jawaban user apakah sesuai dengan jawaban yang benar dari database
+    * @param pil -> pilihan jawaban dari user
+    * @param idType -> id type soal yang diberikan ke user 
+    * @param idQuest -> id soal yang diberikan ke user
+    * @return true atau false -> true berarti user menjawab dengan benar dan false user menjawab salah
+    * @throws SQLException 
+    */
     public String getDBAnswer(char pil, int idType, int idQuest) throws SQLException{      
        String query= ("select ans"+pil+" from "+Database.Table.TABLE_PRETEST_QUESTION+" where idtype = '"+idType+"' AND idquest = '"+idQuest+"'");
        ResultSet rs = q.querySelect(query);
@@ -72,6 +89,11 @@ public class Pretest {
          return answer;
     }
  
+    /**
+     * mengambil soal dengan idType tertentu secara random dan akan di tampilkan ke user
+     * @param idT -> id type soal
+     * @return 
+     */
     public int rand(int idT){
        Random r = new Random();  
        int Low = ((idT*2) + (idT-2));
@@ -82,31 +104,27 @@ public class Pretest {
        return R;
     }
     
+    /**
+     * membuat log/menyimpan hasil jawaban user ke database
+     * @param idpretest -> id pretest user
+     * @param id -> 
+     * @param flag -> sebagai penanda apakah log untuk pretest atau posttest
+     * @param idtype
+     * @param idquest
+     * @param userAns
+     * @param result 
+     */
     public void addPretestLogTest(String idpretest, String id, String flag, int idtype, int  idquest, String userAns, boolean result){
         String query= "insert into "+Database.Table.TABLE_PRETEST_RESULT+" (idpretest, iduser, flag, idtype, idquest, userAns, result) "+ "Values(?,?,?,?,?,?,?)";
         q.insertToDB(idpretest,"string",id, "string", flag,"string", idtype, "int", idquest, "int", userAns, "string", result, "boolean", query);
     }
     
-//    public void addResultTestTemp(String idpretest, String iduser, String flag, int idtype, int  idquest, String userAns, boolean result){
-//        String query= "insert into "+Database.Table.TABLE_PRETEST_RESULT_TEMP+" (idpretest,iduser, flag, idtype, idquest, userAns, result) "+ "Values(?,?,?,?,?,?,?)";
-//        q.insertToDB(idpretest,"string",iduser, "string", flag,"string", idtype, "int", idquest, "int", userAns, "string", result, "boolean", query);
-//    }
-    
-    
-//    public Boolean getResultTestTempSize(String id) throws SQLException{
-//       String query= ("select * from  "+Database.Table.TABLE_PRETEST_RESULT_TEMP+" where iduser = '"+id+"'");
-//       ResultSet rs = q.querySelect(query);
-//       boolean check=false;
-//       int i=0;
-//       
-//       while(rs.next()){     
-//           i++;
-//           if(i==14) return true;
-//        }
-//         return false;
-//    }
-    
-     public ResultSet getDataTestUser() throws SQLException{           
+    /**
+     * mengambil data log pretest user yang telah melakukan pretest
+     * @return hasil query log pretest user
+     * @throws SQLException 
+     */
+    public ResultSet getDataTestUser() throws SQLException{           
        String query= ("select * from  "+Database.Table.TABLE_PRETEST_RESULT);
        ResultSet rs = q.querySelect(query);
          return rs;

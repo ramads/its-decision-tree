@@ -1,7 +1,8 @@
-package model.repository.dbconnection;
+package ta.stc_decisionTree.util;
 
 import java.sql.*;
 import java.util.LinkedList;
+import ta.stc_decisionTree.util.Data;
 
 public class QueryToDB extends DBConnection{
     public Connection conn;

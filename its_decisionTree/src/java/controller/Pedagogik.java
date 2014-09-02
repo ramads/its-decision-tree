@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Vector;
 import ta.stc_decisionTree.data.Database;
-import model.repository.dbconnection.QueryToDB;
+import ta.stc_decisionTree.util.QueryToDB;
 import ta.stc_decisionTree.controller.StudentModel;
 import ta.stc_decisionTree.data.MateriLevel;
 
@@ -27,7 +27,7 @@ public class Pedagogik {
     /**
      * mendapatkan hasil jawaban pretest user
      * @param iduser
-     * @return 
+     * @return daftar hasil jawaban user
      */
     public Vector<Boolean> getPretestResultasIsUser(String iduser){  //dipanggil buat test
         Vector<Boolean> result = new Vector<Boolean>();
@@ -70,11 +70,17 @@ public class Pedagogik {
     /**
      * mendapatkan weak material setelah user melakukan pretest
      * @param idUser
-     * @return 
+     * @return materi yang kurang dikuasai olah user
      */
     public LinkedList<String> getWeakFromSM(String idUser){
+        //instansiasi objek StudentModel
+        //objek ini merupakan objek yang menganalisis model (materi apa saja yang kurang di kuasai) user 
         StudentModel model = new StudentModel();
+        
+        //mengambil hasil pretest user
         Vector<Boolean> resultTes = getPretestResultasIsUser(idUser);
+        
+        //mengembalikan daftar materi2 yang kurang dikuasi oleh user
         return model.getWeakMaterial(resultTes);
     }
     
@@ -101,10 +107,19 @@ public class Pedagogik {
         return false;
     } 
 
+    /**
+     * digunakan untuk menginputkan daftar materi2 yang kurang dikuasai oleh user
+     * berdasasrkan hasil evaluasi jawaban pretest user
+     * @param idUser -> id user yang sedang aktif
+     */
     public void addWeakToDB(String idUser){
+        //jika user terdaftar
         if(!isUserExist(idUser)){
             String query = "insert into "+Database.Table.TABLE_MATERIAL_OBSERVATION
                     +" (iduser, lesson_name, observation, flag) values (?,?,?,?)";
+            
+            //untuk mengetahui apa saja materi yang kurang dikuasi oleh user yang aktif
+            //akan digunakan fungsi getWeakFromSM
             LinkedList<String> weaks = getWeakFromSM(idUser);
             for(String lesson_name:weaks){
                 System.out.println("insert weak: "+lesson_name);
@@ -169,6 +184,7 @@ public class Pedagogik {
         return weak;
     }
     
+    //untuk mengambil materi apa yang akan diberikan ke user setelah melakukan pretest atau posttest
     public String getLearnMaterial(String idUser){
         String learnMaterial = "";
         int lowerLevel = 9999;

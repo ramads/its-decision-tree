@@ -26,6 +26,8 @@
 %>
 <html>
       <head>
+          
+        <!--judul page-->
         <title>Posttest</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <link href="css/templete.css" rel="stylesheet" type="text/css"/>
@@ -33,8 +35,9 @@
         <link type='text/css' href='css/stylesheet.css' rel='stylesheet' media='screen' />       
          <jsp:useBean id="dataPosttest" class="controller.PostTest" scope="session"/>    
           <jsp:useBean id="dataLesson" class="controller.Lesson" scope="session"/>    
-    </head>    
-      <body>       
+    </head>
+ 
+    <body>       
         <div class="container" >
             <div class="header"> </div>          
             <div id="acces">
@@ -54,7 +57,8 @@
             <div class="content"> 
                 <div class="Questions">    
                     <form action="PagePostTest_FormAction.jsp" method="post">
-                    <table border=0>     
+                    <table border=0>
+                        <!--mengambil id soal untuk soal posttest-->
                         <% ResultSet rs = dataPosttest.getidPostQuest(idl);
                             int count=1;
                             if(rs!=null){

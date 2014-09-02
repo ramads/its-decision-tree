@@ -7,7 +7,7 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ta.stc_decisionTree.data.Database;
-import model.repository.dbconnection.QueryToDB;
+import ta.stc_decisionTree.util.QueryToDB;
 
 /**
  *
@@ -24,7 +24,6 @@ public class PostTest {
     public ResultSet getidPostQuest(String idl) throws SQLException{           
        String query= ("select idpostquestion from  "+Database.Table.TABLE_POSTTEST_QUESTIONS+" where idlesson = '"+idl+"'");
        ResultSet rs = queryDB.querySelect(query);
-      
         return rs;
     }
     

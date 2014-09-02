@@ -1,4 +1,4 @@
-package model.repository.dbconnection;
+package ta.stc_decisionTree.util;
 
 public class Data {
     public Object data;

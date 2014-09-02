@@ -9,12 +9,28 @@ import ta.stc_decisionTree.model.DecisionTree;
 import ta.stc_decisionTree.model.MateriPretest;
 
 /**
- *
+ * kelas ini berfungsi untuk memodelkan user yang menggunakan aplikasi.
+ * pemodelan user ini berdasarkan kemampuan user yang diukur dengan kemampuan
+ * menjawab soal pada pretest dan posttes
+ * 
  * @author ami
  */
 public class StudentModel {
+    
+    // variable materiPretest digunakan untuk menyimpan data hasil pretest dari user
+    // data yang disimpan pada variable ini meliputi nama2 materi yang, hasil pretest dari materi (B, S atau K), 
+    // jumlah jawaban benar dan jumlah seluruh soal
     MateriPretest[] materiPretest;
+    
+    public String materi;
+    public int hasil;
+    public int jumlahBenar;
+    public int totalSoal;
+    
+    // variable ini digunakan untuk menyimpan daftar materi2 yang belum dikuasai oleh user
     LinkedList<String> weakMaterial = new LinkedList<>();
+    
+    // variable dTreeList digunakan untuk menyimpan daftar decision tree yang dibentuk
     private LinkedList<DecisionTree> dTreeList = new LinkedList<DecisionTree>();
     
     public StudentModel(){
@@ -29,7 +45,8 @@ public class StudentModel {
     }
     
     /**
-     * memetakan hasil jawaban pretes user ke masing2 materi (B, S, K)
+     * digunakan untuk memetakan hasil jawaban pretes user ke masing2 materi (B, S, K)
+     * kemudian hasil pemetaan tersebut akan disimpan ke dalam variable materiPretest
      * @param hasilJawaban jawaban2 pretes user
      */
     private void createStudentModel(Vector<Boolean> hasilJawaban){
@@ -71,18 +88,46 @@ public class StudentModel {
         }
     }
     
-    private void buatDecisionTree(){
+    /*
+    fungsi yang digunakan untuk membentuk decision tree
+    */
+    private void bentukDecisionTree(){
+        
+        // instansisasi objek Pelatihan
+        //objek pelatihan ini digunakan untuk membangun decision tree
         Pelatihan pLatih = new Pelatihan();
+        
+        //set daftar materi non target
         pLatih.setDaftarMateri((LinkedList<String>) arrayToLinkedList(NamaMateri.LIST_NAMA_MATERI));
+        
+        //set daftar materi yang akan dijadikan sebagai target
         pLatih.setDaftarTarget((LinkedList<String>) arrayToLinkedList(NamaMateri.LIST_NAMA_MATERI));
-        dTreeList = pLatih.buatDecisionTree(new ProsesTes());
+        
+        //memanggil fungsi bentukDecisionTree yang ada pada objek pelatihan dengan diberikan 
+        //parameter objek ProsesTes (objek proses tes digunakan untuk memetakan)
+        dTreeList = pLatih.bentukDecisionTree(new ProsesTes());
     }
     
+    /**
+     * digunakan untuk mencari materi2 yang kurang dikuasai oleh user
+     * untuk mencari materi2 ini digunakan metode decision tree
+     * @param hasilJawaban -> hasil jawaban pretest user
+     * @return daftar materi2 yang kurang dikuasi oleh user
+     */
     public LinkedList<String> getWeakMaterial(Vector<Boolean> hasilJawaban){
+        
+        //memanggil fungsi createStudentModel untuk membentuk student model berdasarkan hasil jawaban pretest dari user
         createStudentModel(hasilJawaban);
-        buatDecisionTree();
+        
+        //memanggil fungsi bentukDecisionTree untuk membentuk decision tree dari data workshop
+        bentukDecisionTree();
+        
         for(DecisionTree dTree : dTreeList){
+            
             System.out.println("Dtree target: "+dTree.tabelTree.getTarget());
+            
+            // inisialisasi variable inputPrediksi dengan nilai hasil dari pemanggilan fungsi getInputPrediksi
+            // yang diberikan parameter decision tree yang telah dibentuk untuk didapatkan inputannya masing2
             String[] inputPrediksi = getInputPrediksi(dTree);
             String hasilPrediksi = dTree.predictTargetAttributeValue(inputPrediksi);
             System.out.println("Hasil Prediksi: "+hasilPrediksi);
@@ -97,6 +142,11 @@ public class StudentModel {
         return weakMaterial;
     }
     
+    /**
+     * digunakan untuk mendapatkan 
+     * @param dTree
+     * @return 
+     */
     private String[] getInputPrediksi(DecisionTree dTree){
         String[] inputPrediksi = new String[dTree.allAttributes.length];
         for(int i=0;i<inputPrediksi.length;i++){

@@ -25,7 +25,7 @@ public class PelatihanTask extends SwingWorker<Void, Void>{
         Pelatihan pLatih = new Pelatihan();
         pLatih.setDaftarMateri(daftarMateri);
         pLatih.setDaftarTarget(daftarTarget);
-        dTreeList = pLatih.buatDecisionTree(new ProsesTes());
+        dTreeList = pLatih.bentukDecisionTree(new ProsesTes());
         return null;
     }
     

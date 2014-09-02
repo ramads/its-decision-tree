@@ -7,7 +7,7 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ta.stc_decisionTree.data.Database;
-import model.repository.dbconnection.QueryToDB;
+import ta.stc_decisionTree.util.QueryToDB;
 
 /**
  *

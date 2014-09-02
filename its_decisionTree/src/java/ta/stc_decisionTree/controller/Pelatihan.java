@@ -44,7 +44,7 @@ public class Pelatihan {
      * @param prosesTes hasil tes dari mahasiswa yang didapat dari workshop harian
      * @return daftar decision tree sebanyak target yang ditentukan
      */
-    public LinkedList<DecisionTree> buatDecisionTree(ProsesTes prosesTes){
+    public LinkedList<DecisionTree> bentukDecisionTree(ProsesTes prosesTes){
         if(isValid(daftarTarget, daftarMateri)){            
             LinkedList<DecisionTree> daftarDTree = new LinkedList<>();
             pTree = new ProsesTabelTree(prosesTes.ambiHasilTes());
