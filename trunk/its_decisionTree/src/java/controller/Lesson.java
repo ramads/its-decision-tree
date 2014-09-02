@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ta.stc_decisionTree.data.Database;
-import model.repository.dbconnection.QueryToDB;
+import ta.stc_decisionTree.util.QueryToDB;
 
 /**
  *

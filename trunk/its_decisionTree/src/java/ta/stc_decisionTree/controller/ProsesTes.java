@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import ta.stc_decisionTree.data.NamaMateri;
 import ta.stc_decisionTree.model.*;
-import ta.stc_decisionTree.util.KoneksiData;
+import ta.stc_decisionTree.util.QueryToDB;
 import ta.stc_decisionTree.util.SQL;
 
 /**
- * kelas untuk mengambil hasil tes mahasiswa dari database
+ * kelas untuk mengambil hasil tes mahasiswa pada saat workshop dari database
  * @author ami
  */
 public class ProsesTes {
@@ -17,7 +17,7 @@ public class ProsesTes {
     private LinkedList<Mahasiswa> daftarMahasiswa;
     
     //koneksi ke databases
-    private KoneksiData koneksi = new KoneksiData();
+    private QueryToDB koneksi = new QueryToDB("tugasakhir");
 
     public ProsesTes(){
         hasilTesHarian = new LinkedList<Tes>();

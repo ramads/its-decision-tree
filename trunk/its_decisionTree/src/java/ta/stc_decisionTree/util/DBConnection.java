@@ -1,4 +1,4 @@
-package model.repository.dbconnection;
+package ta.stc_decisionTree.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

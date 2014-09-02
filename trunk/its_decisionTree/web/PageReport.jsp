@@ -2,6 +2,9 @@
     Document   : PageReport
     Created on : Sep 3, 2013, 11:18:02 AM
     Author     : Arin
+
+    page report ini digunakan untuk menampilkan hasil pretest
+    pada page ini akan di tentukan materi apa saja yang lemah atau kurang dikuaasi oleh user
 --%>
 
 <%@page import="controller.Pedagogik"%>
@@ -63,9 +66,17 @@
                                 <th width="150">Hasil Pretest</th>                                                                                        
                             </tr>
                                 <%  
+                                
+                                    //instansiasi objek pedagogik
+                                    //objek pedagogik ini akan digunakan untuk menganalisis model user berdasarkan hasil pretest
+                                    //dan akan diberikan materi2 yang lemah atau kurang dikuasai oleh user tersebut
                                     Pedagogik pedagogik = new Pedagogik();                                   
+                                    
+                                    //perulangan untuk mengecek hasil jawaban pretest user dan ditampilkan ke halaman web
                                     for (int i=0; i<15; i++){
                                     String idPretest=userID+(i+1);
+                                    
+                                    //mengambil hasil jawaban user
                                     ResultSet rs = dataPretest.getPResult(idPretest);
                                     if(rs!=null){
                                         while(rs.next()){                                    
@@ -95,6 +106,7 @@
                     <div id="angelFace"></div>
                     <div id="angleGuidance">
                         <%  
+                            // input materi2 yang kurang dikuasi oelh user ke log hasil pretest user
                             pedagogik.addWeakToDB(userID);
                             String lesName = pedagogik.getLearnMaterial(userID);    
                         %>
@@ -123,9 +135,9 @@
                  </div>
             </div>
             <div style="clear: both "></div>
-            <div class="demo">
+            <!--div class="demo">
                 <p id="gotodemo"><font style="font-size: 18px;"><a href="PageDemo_SM.jsp">Klik disini </a>untuk mengetahui bagaimana cara IJPT menentukan materi yang anda tidak ketahui</font></p>   
-            </div>
+            </div-->
                  <script type="text/javascript">
                         function blinklink(){
                             if (!document.getElementById('gotodemo').style.color){
