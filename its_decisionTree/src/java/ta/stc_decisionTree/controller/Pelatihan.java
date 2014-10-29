@@ -39,15 +39,19 @@ public class Pelatihan {
     }
     
     /**
-     * fungsi untuk mendapatkan decision tree yang dibuat 
+     * fungsi untuk mendapatkan decision tree yang dibentuk
      * tanpa menggunakan keterkaitan antar materi (semua materi digunakan sebagai atribut)
      * @param prosesTes hasil tes dari mahasiswa yang didapat dari workshop harian
      * @return daftar decision tree sebanyak target yang ditentukan
      */
     public LinkedList<DecisionTree> bentukDecisionTree(ProsesTes prosesTes){
+        
+        //mengecek apakah daftar target ada dalam daftar materi
         if(isValid(daftarTarget, daftarMateri)){            
             LinkedList<DecisionTree> daftarDTree = new LinkedList<>();
-            pTree = new ProsesTabelTree(prosesTes.ambiHasilTes());
+            
+            //mengambil 
+            pTree = new ProsesTabelTree(prosesTes.ambilHasilTes());
             
             String[] daftarAtribut = new String[daftarMateri.size()];
             
@@ -74,7 +78,7 @@ public class Pelatihan {
      */
     public LinkedList<DecisionTree> buatDecisionTreeInference(ProsesTes prosesTes){
         LinkedList<DecisionTree> daftarDTree = new LinkedList<>();
-        pTree = new ProsesTabelTree(prosesTes.ambiHasilTes());
+        pTree = new ProsesTabelTree(prosesTes.ambilHasilTes());
         for(MateriInference mInference : materiInference){
             pTree.setTargetAtribut(mInference.targetMateri);
             pTree.setDaftarAtribut(mInference.materiInference);

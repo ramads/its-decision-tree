@@ -22,11 +22,6 @@ public class StudentModel {
     // jumlah jawaban benar dan jumlah seluruh soal
     MateriPretest[] materiPretest;
     
-    public String materi;
-    public int hasil;
-    public int jumlahBenar;
-    public int totalSoal;
-    
     // variable ini digunakan untuk menyimpan daftar materi2 yang belum dikuasai oleh user
     LinkedList<String> weakMaterial = new LinkedList<>();
     

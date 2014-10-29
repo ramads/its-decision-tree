@@ -6,7 +6,7 @@
 
 <%@page import="javax.jms.Session"%>
 <%@page import="controller.*"%>
-<%@page import="model.repository.dbconnection.*"%>
+<%--<%@page import="model.repository.dbconnection.*"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

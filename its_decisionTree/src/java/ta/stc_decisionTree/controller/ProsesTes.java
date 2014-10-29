@@ -28,7 +28,7 @@ public class ProsesTes {
      * mengambil hasil tes mahasiswa
      * @return list tes mahasiswa
      */
-    public LinkedList<Tes> ambiHasilTes(){
+    public LinkedList<Tes> ambilHasilTes(){
         try {
             prosesDataTes();
         }catch (SQLException ex){

@@ -52,7 +52,15 @@
                 </div>   
             </div>
             <div class="content">
-                <h2 id="title1"><marquee onmouseover="this.stop()" onmouseout="this.start()" width="80%" scrollamount="3" behavior="alternate">Laporan Progres Belajar User "<%= userID %>"</marquee></h2>
+                <h2 id="title1">
+                    <marquee onmouseover="this.stop()" 
+                             onmouseout="this.start()" 
+                             width="80%" 
+                             scrollamount="3" 
+                             behavior="alternate">
+                        Laporan Progres Belajar User "<%= userID %>"
+                    </marquee>
+                </h2>
                 <div class="report">    
                     <form method="post" action="PageReport.jsp">
                         <table border="1" style=" text-align: center;" bgColor="black">
@@ -61,15 +69,13 @@
                                 <th width="270px">Materi</th>                              
                                 <th width="100px">Hasil Posttest</th>                                                                                        
                             </tr>
-                            <%     // String pageR = (request.getParameter("page"));
-                                   // if (pageR==null) pageR="1";
+                            <%
                                    Pedagogik pedagogik = new Pedagogik();
                                    String idCourseMat="";
                                     ResultSet rs = dataLesson.getIdCourseMaterial(userID);
-                                    if(rs!=null){
+                                    if(rs != null){
                                         idCourseMat="";
-                                        while(rs.next()){                                    
-                                        //String id=new String(rs.getString("iduser"));                                                                                                                        
+                                        while(rs.next()){
                                         String bagroundcolor="";
                                         idCourseMat=new String(rs.getString("idcoursemat"));
                                         String lesson = dataLesson.getCourseMaterial(idCourseMat);
@@ -82,7 +88,7 @@
                                                 result="Mengerti";
                                                 bagroundcolor="#9dfdee";
                                             }  
-                                        %>
+                            %>
                                         <tr  bgColor="<%=bagroundcolor %>">                                    
                                             <td width="70" ><%= count%>.</td>                                             
                                             <td width="70" ><%= lesson%></td>                       
@@ -106,48 +112,24 @@
                  <div class="guideAngel">   
                           <div id="angelFace"></div>
                            <div id="angleGuidance">
-                               <%  if(idCourseMat.equals("")){
-                                   %>
+                               <%  if(idCourseMat.equals("")){ %>
                                    <p id="guidence" style="margin-top : 50px;">Silahkan Posttest terlebih Dahulu</p>
-                               <%}else{
-                                    String nextMaterial=pedagogik.getLearnMaterial(userID);
-
-                                    if(nextMaterial.equals("")){                                              
-                                        %>    
+                               <%}else{                                  
+                                   String nextMaterial = pedagogik.getLearnMaterial(userID);
+                                   if(nextMaterial.equals("")){                                              
+                               %>    
                                         <p  id="guidence">Dari Hasil test Anda Dikatakan Telah Tamat Belajar. <br><h1>LULUS.....!!</h1></p>
 
-                                    <% }else{ 
+                               <%  }else{ 
                                             String topic=dataLesson.getTopicBaseOnLessonName(nextMaterial);
                                         %>
                                         <p  id="guidence">Selanjutnya Materi yang harus anda pelajari adalah :<br><b><a href="PageLesson.jsp?data=<%=dataLesson.getIdLessonName(nextMaterial) %>"> <%=topic%></b></a></p>
-                                    <% } 
-                               }%>
+                               <% }
+                               }
+                               %>
                            </div>
                  </div>
             </div> 
-           <div style="clear: both "></div>
-            <div class="demo">
-                <p id="gotodemo"><font style="font-size: 18px;"><a href="PageDemo_Pedagogik.jsp">Klik disini </a>untuk mengetahui bagaimana cara IJPT menentukan materi yang anda tidak ketahui</font></p>   
-            </div>
-            <script type="text/javascript">
-                    function blinklink(){
-                        if (!document.getElementById('gotodemo').style.color){
-                            document.getElementById('gotodemo').style.color="black";
-                        }
-                        if (document.getElementById('gotodemo').style.color=="black"){
-                            document.getElementById('gotodemo').style.color="red";
-                        }else{
-                        document.getElementById('gotodemo').style.color="black";
-                        }
-
-                        timer=setTimeout("blinklink()",300);
-                        }
-
-                    function stoptimer(){
-                        clearTimeout(timer);
-                    }
-                    blinklink();
-                </script>
            <div style="clear: both "></div>
             <div class="footer">
                 <div class="designer">

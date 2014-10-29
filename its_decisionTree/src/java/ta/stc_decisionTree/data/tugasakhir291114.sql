@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 15, 2014 at 05:21 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: 127.0.0.1
+-- Generation Time: Oct 29, 2014 at 04:29 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -40,16 +40,38 @@ CREATE TABLE IF NOT EXISTS `course_material` (
 --
 
 INSERT INTO `course_material` (`idcoursemat`, `post_date`, `iduser`, `idlesson`, `post_result`) VALUES
-('m07101rama', '2014-07-07 22:18:44', '01rama', 'm07', 1),
-('m07201rama', '2014-07-07 22:34:46', '01rama', 'm07', 1),
-('m00101rama', '2014-07-07 22:50:59', '01rama', 'm00', 1),
-('m001f1b008', '2014-07-08 06:05:47', 'f1b008', 'm00', 1),
-('m00201rama', '2014-07-10 02:04:21', '01rama', 'm00', 1),
-('m00301rama', '2014-07-10 02:15:13', '01rama', 'm00', 1),
-('m00401rama', '2014-07-10 02:18:59', '01rama', 'm00', 1),
-('m00501rama', '2014-07-10 02:23:02', '01rama', 'm00', 1),
-('m00601rama', '2014-07-10 02:31:05', '01rama', 'm00', 1),
-('m03101rama', '2014-07-10 03:05:37', '01rama', 'm03', 1);
+('m001ramads', '2014-10-28 16:40:24', 'ramads', 'm00', 0),
+('m002ramads', '2014-10-28 16:45:07', 'ramads', 'm00', 0),
+('m003ramads', '2014-10-28 16:46:03', 'ramads', 'm00', 0),
+('m004ramads', '2014-10-28 16:48:18', 'ramads', 'm00', 0),
+('m005ramads', '2014-10-28 16:48:55', 'ramads', 'm00', 0),
+('m006ramads', '2014-10-28 16:51:01', 'ramads', 'm00', 0),
+('m007ramads', '2014-10-28 16:52:32', 'ramads', 'm00', 0),
+('m008ramads', '2014-10-28 16:56:48', 'ramads', 'm00', 0),
+('m009ramads', '2014-10-28 16:59:04', 'ramads', 'm00', 0),
+('m0010ramads', '2014-10-28 17:00:46', 'ramads', 'm00', 0),
+('m0011ramads', '2014-10-28 17:03:32', 'ramads', 'm00', 0),
+('m0012ramads', '2014-10-28 17:05:38', 'ramads', 'm00', 0),
+('m0013ramads', '2014-10-28 17:07:57', 'ramads', 'm00', 0),
+('m0014ramads', '2014-10-28 17:10:34', 'ramads', 'm00', 0),
+('m0015ramads', '2014-10-28 17:12:14', 'ramads', 'm00', 0),
+('m0016ramads', '2014-10-28 17:14:43', 'ramads', 'm00', 0),
+('m0017ramads', '2014-10-29 01:25:22', 'ramads', 'm00', 0),
+('m0018ramads', '2014-10-29 01:28:08', 'ramads', 'm00', 0),
+('m0019ramads', '2014-10-29 01:31:22', 'ramads', 'm00', 0),
+('m0020ramads', '2014-10-29 01:34:54', 'ramads', 'm00', 0),
+('m0021ramads', '2014-10-29 01:35:33', 'ramads', 'm00', 0),
+('m0022ramads', '2014-10-29 01:35:54', 'ramads', 'm00', 0),
+('m0023ramads', '2014-10-29 01:38:11', 'ramads', 'm00', 0),
+('m0024ramads', '2014-10-29 01:41:30', 'ramads', 'm00', 0),
+('m0025ramads', '2014-10-29 01:53:22', 'ramads', 'm00', 0),
+('m0026ramads', '2014-10-29 01:55:15', 'ramads', 'm00', 0),
+('m0027ramads', '2014-10-29 02:00:05', 'ramads', 'm00', 0),
+('m0028ramads', '2014-10-29 02:02:19', 'ramads', 'm00', 0),
+('m0029ramads', '2014-10-29 02:02:46', 'ramads', 'm00', 0),
+('m0030ramads', '2014-10-29 02:10:22', 'ramads', 'm00', 0),
+('m0031ramads', '2014-10-29 02:15:09', 'ramads', 'm00', 0),
+('m0032ramads', '2014-10-29 02:16:16', 'ramads', 'm00', 0);
 
 -- --------------------------------------------------------
 
@@ -171,9 +193,7 @@ CREATE TABLE IF NOT EXISTS `datauser` (
 --
 
 INSERT INTO `datauser` (`iduser`, `name`, `password`) VALUES
-('00rama', '00rama', '00rama'),
-('01rama', '01rama', '01rama'),
-('f1b008', 'ramaditia', 'f1b008');
+('ramads', 'ramads', 'ramads');
 
 -- --------------------------------------------------------
 
@@ -332,23 +352,6 @@ CREATE TABLE IF NOT EXISTS `material_obervation` (
   `flag` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `material_obervation`
---
-
-INSERT INTO `material_obervation` (`iduser`, `lesson_name`, `observation`, `flag`) VALUES
-('01rama', 'switchCase', 0, 'weak'),
-('01rama', 'opRelation', 0, 'weak'),
-('01rama', 'opArithmetic', 0, 'weak'),
-('01rama', 'logic', 0, 'weak'),
-('01rama', 'pdt', 0, 'weak'),
-('f1b008', 'basejava', 0, 'weak'),
-('f1b008', 'pdt', 0, 'weak'),
-('f1b008', 'opArithmetic', 0, 'weak'),
-('f1b008', 'opIncNdec', 0, 'weak'),
-('f1b008', 'opRelation', 0, 'weak'),
-('f1b008', 'switchCase', 0, 'weak');
-
 -- --------------------------------------------------------
 
 --
@@ -468,160 +471,7 @@ CREATE TABLE IF NOT EXISTS `posttest_result` (
   `userAnswer` enum('a','b','c','d','x') NOT NULL,
   `result` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_posttest`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=148 ;
-
---
--- Dumping data for table `posttest_result`
---
-
-INSERT INTO `posttest_result` (`id_posttest`, `id_user`, `idCourse`, `idType`, `idQuestion`, `userAnswer`, `result`) VALUES
-(1, '01rama', 'm07101rama', 1, 1, 'c', 1),
-(2, '01rama', 'm07101rama', 2, 4, 'b', 1),
-(3, '01rama', 'm07101rama', 3, 8, 'c', 0),
-(4, '01rama', 'm07101rama', 4, 10, 'c', 0),
-(5, '01rama', 'm07101rama', 5, 14, 'd', 1),
-(6, '01rama', 'm07101rama', 6, 17, 'a', 1),
-(7, '01rama', 'm07101rama', 7, 20, 'b', 0),
-(8, '01rama', 'm07101rama', 8, 22, 'a', 1),
-(9, '01rama', 'm07101rama', 9, 26, 'b', 1),
-(10, '01rama', 'm07101rama', 10, 28, 'b', 1),
-(11, '01rama', 'm07101rama', 11, 33, 'b', 0),
-(12, '01rama', 'm07101rama', 12, 35, 'a', 0),
-(13, '01rama', 'm07101rama', 13, 38, 'b', 1),
-(14, '01rama', 'm07101rama', 14, 42, 'c', 1),
-(15, '01rama', 'm07101rama', 15, 44, 'd', 1),
-(16, '01rama', 'm07101rama', 15, 44, 'd', 1),
-(17, '01rama', 'm07101rama', 15, 44, 'd', 1),
-(18, '01rama', 'm07201rama', 1, 1, 'c', 1),
-(19, '01rama', 'm07201rama', 2, 4, 'b', 1),
-(20, '01rama', 'm07201rama', 3, 7, 'a', 0),
-(21, '01rama', 'm07201rama', 4, 12, 'c', 1),
-(22, '01rama', 'm07201rama', 5, 13, 'b', 0),
-(23, '01rama', 'm07201rama', 6, 18, 'b', 0),
-(24, '01rama', 'm07201rama', 7, 21, 'a', 1),
-(25, '01rama', 'm07201rama', 8, 24, 'b', 0),
-(26, '01rama', 'm07201rama', 9, 27, 'b', 1),
-(27, '01rama', 'm07201rama', 10, 28, 'b', 1),
-(28, '01rama', 'm07201rama', 11, 33, 'b', 0),
-(29, '01rama', 'm07201rama', 12, 36, 'b', 0),
-(30, '01rama', 'm07201rama', 13, 38, 'b', 1),
-(31, '01rama', 'm07201rama', 14, 41, 'b', 1),
-(32, '01rama', 'm07201rama', 15, 43, 'd', 0),
-(33, '01rama', 'm07201rama', 15, 43, 'd', 0),
-(34, '01rama', 'm07201rama', 15, 43, 'd', 0),
-(35, '01rama', 'm00101rama', 1, 3, 'a', 0),
-(36, '01rama', 'm00101rama', 2, 5, 'b', 0),
-(37, '01rama', 'm00101rama', 3, 9, 'a', 0),
-(38, '01rama', 'm00101rama', 4, 11, 'a', 0),
-(39, '01rama', 'm00101rama', 5, 15, 'c', 1),
-(40, '01rama', 'm00101rama', 6, 17, 'a', 1),
-(41, '01rama', 'm00101rama', 7, 19, 'b', 0),
-(42, '01rama', 'm00101rama', 8, 24, 'a', 1),
-(43, '01rama', 'm00101rama', 9, 27, 'a', 0),
-(44, '01rama', 'm00101rama', 10, 28, 'b', 1),
-(45, '01rama', 'm00101rama', 11, 33, 'c', 1),
-(46, '01rama', 'm00101rama', 12, 34, 'b', 1),
-(47, '01rama', 'm00101rama', 13, 38, 'b', 1),
-(48, '01rama', 'm00101rama', 14, 42, 'c', 1),
-(49, '01rama', 'm00101rama', 15, 45, 'c', 0),
-(50, 'f1b008', 'm001f1b008', 1, 1, 'b', 0),
-(51, 'f1b008', 'm001f1b008', 2, 5, 'b', 0),
-(52, 'f1b008', 'm001f1b008', 3, 7, 'd', 1),
-(53, 'f1b008', 'm001f1b008', 4, 10, 'c', 0),
-(54, 'f1b008', 'm001f1b008', 5, 13, 'b', 0),
-(55, 'f1b008', 'm001f1b008', 6, 17, 'a', 1),
-(56, 'f1b008', 'm001f1b008', 7, 20, 'b', 0),
-(57, 'f1b008', 'm001f1b008', 8, 23, 'b', 0),
-(58, 'f1b008', 'm001f1b008', 9, 27, 'b', 1),
-(59, 'f1b008', 'm001f1b008', 10, 29, 'c', 1),
-(60, 'f1b008', 'm001f1b008', 11, 32, 'b', 0),
-(61, 'f1b008', 'm001f1b008', 12, 36, 'b', 0),
-(62, 'f1b008', 'm001f1b008', 13, 38, 'b', 1),
-(63, 'f1b008', 'm001f1b008', 14, 41, 'b', 1),
-(64, 'f1b008', 'm001f1b008', 15, 44, 'b', 0),
-(65, 'f1b008', 'm001f1b008', 15, 44, 'b', 0),
-(66, 'f1b008', 'm001f1b008', 15, 44, 'b', 0),
-(67, 'f1b008', 'm001f1b008', 15, 44, 'b', 0),
-(68, '01rama', 'm00201rama', 1, 3, 'b', 0),
-(69, '01rama', 'm00201rama', 2, 6, 'b', 0),
-(70, '01rama', 'm00201rama', 3, 8, 'b', 1),
-(71, '01rama', 'm00201rama', 4, 12, 'b', 0),
-(72, '01rama', 'm00201rama', 5, 15, 'c', 1),
-(73, '01rama', 'm00201rama', 6, 16, 'd', 0),
-(74, '01rama', 'm00201rama', 7, 20, 'b', 0),
-(75, '01rama', 'm00201rama', 8, 22, 'a', 1),
-(76, '01rama', 'm00201rama', 9, 27, 'a', 0),
-(77, '01rama', 'm00201rama', 10, 30, 'a', 0),
-(78, '01rama', 'm00201rama', 11, 31, 'b', 1),
-(79, '01rama', 'm00201rama', 12, 35, 'b', 1),
-(80, '01rama', 'm00201rama', 13, 39, 'b', 1),
-(81, '01rama', 'm00201rama', 14, 40, 'b', 0),
-(82, '01rama', 'm00201rama', 15, 43, 'c', 1),
-(83, '01rama', 'm00301rama', 1, 2, 'a', 1),
-(84, '01rama', 'm00301rama', 2, 5, 'd', 1),
-(85, '01rama', 'm00301rama', 3, 8, 'c', 0),
-(86, '01rama', 'm00301rama', 4, 10, 'c', 0),
-(87, '01rama', 'm00301rama', 5, 15, 'c', 1),
-(88, '01rama', 'm00301rama', 6, 16, 'd', 0),
-(89, '01rama', 'm00301rama', 7, 20, 'b', 0),
-(90, '01rama', 'm00301rama', 8, 23, 'c', 1),
-(91, '01rama', 'm00301rama', 9, 26, 'b', 1),
-(92, '01rama', 'm00301rama', 10, 29, 'b', 0),
-(93, '01rama', 'm00301rama', 11, 32, 'c', 0),
-(94, '01rama', 'm00301rama', 12, 34, 'b', 1),
-(95, '01rama', 'm00301rama', 13, 37, 'b', 0),
-(96, '01rama', 'm00301rama', 14, 40, 'a', 0),
-(97, '01rama', 'm00301rama', 15, 45, 'c', 0),
-(98, '01rama', 'm00401rama', 1, 1, 'c', 1),
-(99, '01rama', 'm00401rama', 2, 5, 'd', 1),
-(100, '01rama', 'm00401rama', 3, 8, 'd', 0),
-(101, '01rama', 'm00401rama', 4, 10, 'c', 0),
-(102, '01rama', 'm00401rama', 5, 14, 'b', 0),
-(103, '01rama', 'm00401rama', 6, 16, 'd', 0),
-(104, '01rama', 'm00401rama', 7, 20, 'b', 0),
-(105, '01rama', 'm00401rama', 8, 22, 'b', 0),
-(106, '01rama', 'm00401rama', 9, 25, 'b', 0),
-(107, '01rama', 'm00401rama', 10, 30, 'a', 0),
-(108, '01rama', 'm00401rama', 11, 32, 'b', 0),
-(109, '01rama', 'm00401rama', 12, 35, 'b', 1),
-(110, '01rama', 'm00401rama', 13, 37, 'c', 1),
-(111, '01rama', 'm00401rama', 14, 40, 'c', 1),
-(112, '01rama', 'm00401rama', 15, 45, 'c', 0),
-(113, '01rama', 'm00501rama', 1, 1, 'c', 1),
-(114, '01rama', 'm00501rama', 2, 6, 'd', 1),
-(115, '01rama', 'm00501rama', 3, 9, 'd', 0),
-(116, '01rama', 'm00501rama', 4, 10, 'c', 0),
-(117, '01rama', 'm00501rama', 5, 14, 'd', 1),
-(118, '01rama', 'm00501rama', 6, 16, 'd', 0),
-(119, '01rama', 'm00501rama', 7, 19, 'c', 0),
-(120, '01rama', 'm00501rama', 8, 22, 'a', 1),
-(121, '01rama', 'm00501rama', 9, 26, 'b', 1),
-(122, '01rama', 'm00501rama', 10, 30, 'b', 0),
-(123, '01rama', 'm00501rama', 11, 33, 'b', 0),
-(124, '01rama', 'm00501rama', 12, 34, 'b', 1),
-(125, '01rama', 'm00501rama', 13, 39, 'c', 0),
-(126, '01rama', 'm00501rama', 14, 41, 'b', 1),
-(127, '01rama', 'm00501rama', 15, 44, 'd', 1),
-(128, '01rama', 'm00601rama', 1, 3, 'a', 0),
-(129, '01rama', 'm00601rama', 2, 4, 'b', 1),
-(130, '01rama', 'm00601rama', 3, 9, 'c', 0),
-(131, '01rama', 'm00601rama', 4, 12, 'b', 0),
-(132, '01rama', 'm00601rama', 5, 15, 'c', 1),
-(133, '01rama', 'm00601rama', 6, 16, 'd', 0),
-(134, '01rama', 'm00601rama', 7, 20, 'b', 0),
-(135, '01rama', 'm00601rama', 8, 24, 'b', 0),
-(136, '01rama', 'm00601rama', 9, 26, 'b', 1),
-(137, '01rama', 'm00601rama', 10, 28, 'a', 0),
-(138, '01rama', 'm00601rama', 11, 32, 'b', 0),
-(139, '01rama', 'm00601rama', 12, 34, 'b', 1),
-(140, '01rama', 'm00601rama', 13, 37, 'c', 1),
-(141, '01rama', 'm00601rama', 14, 40, 'c', 1),
-(142, '01rama', 'm00601rama', 15, 45, 'c', 0),
-(143, '01rama', 'm03101rama', 1, 1, 'c', 1),
-(144, '01rama', 'm03101rama', 2, 4, 'b', 1),
-(145, '01rama', 'm03101rama', 3, 8, 'c', 0),
-(146, '01rama', 'm03101rama', 4, 11, 'a', 0),
-(147, '01rama', 'm03101rama', 5, 13, 'b', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -634,15 +484,6 @@ CREATE TABLE IF NOT EXISTS `pretestlog` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`iduser`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `pretestlog`
---
-
-INSERT INTO `pretestlog` (`iduser`, `date`) VALUES
-('00rama', '2014-07-07 14:16:48'),
-('01rama', '2014-07-07 14:20:24'),
-('f1b008', '2014-07-08 06:04:36');
 
 -- --------------------------------------------------------
 
@@ -722,64 +563,12 @@ INSERT INTO `pretestquestion` (`idtype`, `idquest`, `question`, `ansA`, `ansB`, 
 CREATE TABLE IF NOT EXISTS `pretestresult` (
   `idpretest` varchar(50) NOT NULL,
   `iduser` varchar(15) NOT NULL,
-  `flag` enum('pretest','posttest') NOT NULL,
   `idtype` int(11) NOT NULL,
   `idquest` int(11) NOT NULL,
   `userAns` enum('a','b','c','d','x') NOT NULL,
   `result` tinyint(1) NOT NULL,
   PRIMARY KEY (`idpretest`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `pretestresult`
---
-
-INSERT INTO `pretestresult` (`idpretest`, `iduser`, `flag`, `idtype`, `idquest`, `userAns`, `result`) VALUES
-('00rama1', '00rama', 'pretest', 1, 1, 'c', 1),
-('00rama2', '00rama', 'pretest', 2, 5, 'd', 1),
-('00rama3', '00rama', 'pretest', 3, 7, 'd', 1),
-('00rama4', '00rama', 'pretest', 4, 12, 'b', 0),
-('00rama5', '00rama', 'pretest', 5, 15, 'c', 1),
-('00rama6', '00rama', 'pretest', 6, 17, 'a', 1),
-('00rama7', '00rama', 'pretest', 7, 21, 'a', 1),
-('00rama8', '00rama', 'pretest', 8, 23, 'b', 0),
-('00rama9', '00rama', 'pretest', 9, 27, 'b', 1),
-('00rama10', '00rama', 'pretest', 10, 29, 'd', 0),
-('00rama11', '00rama', 'pretest', 11, 32, 'b', 0),
-('00rama12', '00rama', 'pretest', 12, 36, 'c', 1),
-('00rama13', '00rama', 'pretest', 13, 37, 'b', 0),
-('00rama14', '00rama', 'pretest', 14, 42, 'c', 1),
-('00rama15', '00rama', 'pretest', 15, 44, 'd', 1),
-('01rama1', '01rama', 'pretest', 1, 1, 'c', 1),
-('01rama2', '01rama', 'pretest', 2, 6, 'c', 0),
-('01rama3', '01rama', 'pretest', 3, 9, 'd', 0),
-('01rama4', '01rama', 'pretest', 4, 10, 'c', 0),
-('01rama5', '01rama', 'pretest', 5, 13, 'a', 1),
-('01rama6', '01rama', 'pretest', 6, 18, 'a', 1),
-('01rama7', '01rama', 'pretest', 7, 20, 'b', 0),
-('01rama8', '01rama', 'pretest', 8, 24, 'b', 0),
-('01rama9', '01rama', 'pretest', 9, 26, 'b', 1),
-('01rama10', '01rama', 'pretest', 10, 28, 'a', 0),
-('01rama11', '01rama', 'pretest', 11, 32, 'c', 0),
-('01rama12', '01rama', 'pretest', 12, 35, 'b', 1),
-('01rama13', '01rama', 'pretest', 13, 39, 'b', 1),
-('01rama14', '01rama', 'pretest', 14, 41, 'b', 1),
-('01rama15', '01rama', 'pretest', 15, 44, 'd', 1),
-('f1b0081', 'f1b008', 'pretest', 1, 2, 'd', 0),
-('f1b0082', 'f1b008', 'pretest', 2, 6, 'a', 0),
-('f1b0083', 'f1b008', 'pretest', 3, 8, 'a', 0),
-('f1b0084', 'f1b008', 'pretest', 4, 10, 'c', 0),
-('f1b0085', 'f1b008', 'pretest', 5, 14, 'd', 1),
-('f1b0086', 'f1b008', 'pretest', 6, 17, 'a', 1),
-('f1b0087', 'f1b008', 'pretest', 7, 20, 'b', 0),
-('f1b0088', 'f1b008', 'pretest', 8, 23, 'b', 0),
-('f1b0089', 'f1b008', 'pretest', 9, 27, 'a', 0),
-('f1b00810', 'f1b008', 'pretest', 10, 29, 'c', 1),
-('f1b00811', 'f1b008', 'pretest', 11, 31, 'a', 0),
-('f1b00812', 'f1b008', 'pretest', 12, 36, 'c', 1),
-('f1b00813', 'f1b008', 'pretest', 13, 38, 'b', 1),
-('f1b00814', 'f1b008', 'pretest', 14, 42, 'c', 1),
-('f1b00815', 'f1b008', 'pretest', 15, 45, 'c', 0);
 
 -- --------------------------------------------------------
 
