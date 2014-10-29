@@ -114,9 +114,9 @@ public class Pretest {
      * @param userAns
      * @param result 
      */
-    public void addPretestLogTest(String idpretest, String id, String flag, int idtype, int  idquest, String userAns, boolean result){
+    public void addPretestLogTest(String idpretest, String id, int idtype, int  idquest, String userAns, boolean result){
         String query= "insert into "+Database.Table.TABLE_PRETEST_RESULT+" (idpretest, iduser, flag, idtype, idquest, userAns, result) "+ "Values(?,?,?,?,?,?,?)";
-        q.insertToDB(idpretest,"string",id, "string", flag,"string", idtype, "int", idquest, "int", userAns, "string", result, "boolean", query);
+        q.insertToDB(idpretest,"string",id, "string", idtype, "int", idquest, "int", userAns, "string", result, "boolean", query);
     }
     
     /**

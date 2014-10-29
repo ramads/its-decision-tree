@@ -65,14 +65,15 @@
            
            //jika jawaban user salah
            }else {
-              if(userAns.equals("")) userAns="x"; 
+              if(userAns.equals("")) userAns="x";
               result = false;  
            }
            String idCourse = dataPosttest.getLastIdCourse(userID);
            dataPosttest.addPosttestResult(userID, idCourse, Integer.parseInt(idT), Integer.parseInt(idQ), userAns, result);
            count++;
            
-           if(Integer.parseInt(idT)<15){
+           //cek apakah soal telah habis
+           if(Integer.parseInt(idT) < 15){
                %>
                 <jsp:forward page="PagePostTest_STC.jsp">
                     <jsp:param name="count"  value="<%=count%>" />

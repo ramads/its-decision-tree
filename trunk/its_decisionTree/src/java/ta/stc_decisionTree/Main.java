@@ -10,7 +10,7 @@ import ta.stc_decisionTree.model.TabelTree;
 public class Main {
     public static void main(String[] args){
         ProsesTes pt = new ProsesTes();
-        ProsesTabelTree tTree = new ProsesTabelTree(pt.ambiHasilTes());
+        ProsesTabelTree tTree = new ProsesTabelTree(pt.ambilHasilTes());
         tTree.setDaftarAtribut(
                 NamaMateri.ARRAY, 
                 NamaMateri.IF_ELSE, 

@@ -8,6 +8,7 @@ import ta.stc_decisionTree.data.Database;
 import ta.stc_decisionTree.util.QueryToDB;
 import ta.stc_decisionTree.controller.StudentModel;
 import ta.stc_decisionTree.data.MateriLevel;
+import ta.stc_decisionTree.data.RuleTypeSoal;
 
 /**
  *
@@ -184,16 +185,26 @@ public class Pedagogik {
         return weak;
     }
     
-    //untuk mengambil materi apa yang akan diberikan ke user setelah melakukan pretest atau posttest
+    /**
+     * digunakan untuk mengambil materi apa yang akan diberikan kepada user setelah melakukan pretest atau posttest 
+     * pengambilan materi ini didasarkan atas level materi terendah yg ada pada buku JENI
+     * @param idUser -> id user 
+     * @return 1 materi dengan level terendah yg harus dipelajari user
+     */
     public String getLearnMaterial(String idUser){
         String learnMaterial = "";
         int lowerLevel = 9999;
         
+        //mengambil daftar materi yg kurang dikuasai user dari database
         String query = "select lesson_name from "+Database.Table.TABLE_MATERIAL_OBSERVATION
                 +" where iduser='"+idUser+"' and flag='weak'";
+        
+        //menegambil list mataeri perlevel yg telah dibuat
         String[] listLevel = MateriLevel.LIST_LEVEL;
+        
         ResultSet rs = queryDB.querySelect(query);
         try {
+            //menngecek materi level terendah dengan menggunakan perulangan
             while(rs.next()){
                 for(int i=0;i<listLevel.length;i++){
                     String nama_materi = rs.getString("lesson_name");
@@ -209,5 +220,71 @@ public class Pedagogik {
             System.out.println("Error di get learn material: "+ex.getMessage());
         }
         return learnMaterial;
+    }
+    
+    public void updateWeakWithoutPosttest(String idUser, String newIdCourse, String lastIdCourse){
+        PostTest ptest = new PostTest();
+        boolean hadPostTest = false;
+        try {
+            int idType = 0;
+            int idQuestion = 0;
+            String userAns = "";
+            boolean result = false;
+            String lessonName = "";
+            String queryLessonName = "select l.lessonname from lesson l, course_material c where l.idlesson=c.idlesson and c.idcoursemat='"+newIdCourse+"'";
+            ResultSet rs = queryDB.querySelect(queryLessonName);
+            if(rs.next()){
+                lessonName = rs.getString("lessonname");
+            }
+            LinkedList<Integer> typeSoal = RuleTypeSoal.getTypeSoal(lessonName);
+            hadPostTest = ptest.hadPostest(idUser);
+            
+            String queryResult = "";
+            
+            //jika sudah melakukan posttest, jadikan false semua hasil posttest terakhir yang type soalnya terdapat materi belajar
+            if(hadPostTest){
+                queryResult = "select * from "+Database.Table.TABLE_POSTTEST_RESULT+" where idCourse = '"+lastIdCourse+"' order by idType asc";
+                ResultSet rSet = queryDB.querySelect(queryResult);
+                while(rSet.next()){
+                    idType = rSet.getInt("idType");
+                    idQuestion = rSet.getInt("idQuestion");
+                    userAns = rSet.getString("userAnswer");
+                    result = rSet.getBoolean("result");
+                    if(isTypeSoal(typeSoal, idType)){
+                        ptest.addPosttestResult(idUser, newIdCourse, idType, idQuestion, "x", false);
+                    }else{
+                        ptest.addPosttestResult(idUser, newIdCourse, idType, idQuestion, userAns, result);
+                    }
+                }
+
+            //jika belum melakukan posttest maka akan jadikan false semua hasil pretest yang type soalnya terdapat materi belajar
+            }else{
+                queryResult = "select * from "+Database.Table.TABLE_PRETEST_RESULT+" where iduser = '"+idUser+"' order by idtype asc";
+                ResultSet rSet = queryDB.querySelect(queryResult);
+                while(rSet.next()){
+                    idType = rSet.getInt("idtype");
+                    idQuestion = rSet.getInt("idquest");
+                    userAns = rSet.getString("userAns");
+                    result = rSet.getBoolean("result");
+                    if(isTypeSoal(typeSoal, idType)){
+                        ptest.addPosttestResult(idUser, newIdCourse, idType, idQuestion, "x", false);
+                    }else{
+                        ptest.addPosttestResult(idUser, newIdCourse, idType, idQuestion, userAns, result);
+                    }
+                }
+            }
+            
+            
+        }catch(SQLException e){}
+    }
+    
+    public boolean isTypeSoal(LinkedList<Integer> typeSoal, int idType){
+        for (int tSoal : typeSoal) {
+            System.out.println(tSoal+ ", "+idType);
+            if (tSoal == idType) {
+                return true;
+            }
+        }
+        return false;
     }
 }

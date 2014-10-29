@@ -57,7 +57,16 @@
                 </div>   
             </div>
             <div class="content">
-                <h2 id="title1"><marquee onmouseover="this.stop()" onmouseout="this.start()" width="80%" scrollamount="3" behavior="alternate">Laporan Hasil Pretest User "<%= userID %>"</marquee></h2>
+                <h2 id="title1">
+                    <marquee 
+                        onmouseover="this.stop()" 
+                        onmouseout="this.start()" 
+                        width="80%" 
+                        scrollamount="3" 
+                        behavior="alternate">
+                        Laporan Hasil Pretest User "<%= userID %>"
+                    </marquee>
+                </h2>
                 <div class="report">    
                     <form method="post" action="PageReport.jsp">
                         <table border="1" style=" text-align: center; ">
@@ -106,16 +115,20 @@
                     <div id="angelFace"></div>
                     <div id="angleGuidance">
                         <%  
-                            // input materi2 yang kurang dikuasi oelh user ke log hasil pretest user
+                            // input materi2 yang kurang dikuasi oleh user ke log hasil pretest user
                             pedagogik.addWeakToDB(userID);
+                            
+                            //dari materi2 yang kurang dikuasai oleh user, diambil hanya 1 materi untuk diajarkan kepada user
+                            //materi yg diajarkan dipilih berdasarkan level materi terendah yg ada pada buku ajar JENI
                             String lesName = pedagogik.getLearnMaterial(userID);    
                         %>
                        Dari Hasil Pretest Anda Lemah Pada Materi Mengenai :
-                        <%  ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
+                        <%  
+                            ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
                             if(rs2!=null){
                                 String weakMaterial="";
                                 while(rs2.next()){ 
-                                    weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ %>
+                                    weakMaterial= new String(rs2.getString("lesson_name")); %>
                         <ul>
                             <li style="list-style-image: url(images/icon/warning.png)"><%= dataLesson.getTopicBaseOnLessonName(weakMaterial)%></li>
                         </ul>

@@ -59,10 +59,9 @@ public class PostTest {
     
     public boolean hadPostest(String idu) throws SQLException{
         boolean check=false;
-            String query= ("select iduser from  "+Database.Table.TABLE_COURSE_MATERIAL+" where iduser = '"+idu+"'");
+            String query= ("select id_user from  "+Database.Table.TABLE_POSTTEST_RESULT+" where id_user = '"+idu+"'");
             ResultSet rs = queryDB.querySelect(query);
             check=rs.next();
-            
             return check;
     }
     

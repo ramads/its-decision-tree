@@ -4,6 +4,7 @@
     Author     : Arin
 --%>
 
+<%@page import="controller.PostTest"%>
 <%@page import="controller.Pedagogik"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
@@ -28,33 +29,36 @@
     <body>
         <%  
           
-          // id materi yang terakhir diajarkan
-          String idLesson = request.getParameter("idl");
-          String result = request.getParameter("result")  == null ? "x" : request.getParameter("result");
+        // id materi yang terakhir diajarkan
+        String idLesson = request.getParameter("idl");
+        String result = request.getParameter("result")  == null ? "x" : request.getParameter("result");
             
-          if (result.equals("x")) out.println("<h1>Silahkan Kembali dan pilih salah satu hasil blajar anda.............................!!</h1>");
+        if (result.equals("x")) out.println("<h1>Silahkan Kembali dan pilih salah satu hasil blajar anda.............................!!</h1>");
           
-          // total berapa kali sudah belajar
-          int count=dataLesson.getTotalLearn(userID,idLesson);
+        // total berapa kali sudah belajar
+        int count=dataLesson.getTotalLearn(userID,idLesson);
           
-          // nama materi berdasarkan id materi yang telah diambil
-          String lessonName= dataLesson.getLessonName(idLesson);
-          
-          // id learning -> id yang bakal disimpan kedatabase
-          String idLearning=idLesson+count+userID;
+        // nama materi berdasarkan id materi yang telah diambil
+        String lessonName= dataLesson.getLessonName(idLesson);
+        
+        String lastIdCourse = new PostTest().getLastIdCourse(userID);
+        // id learning -> id yang bakal disimpan kedatabase
+        String newIdCourse=idLesson+count+userID;
           
         if(result.equals("no")){
-            dataLesson.addCourseMaterial(idLearning, userID, idLesson, false);
+            dataLesson.addCourseMaterial(newIdCourse, userID, idLesson, false);
             
             // penentuan materi selanjutnya yang akan diajarkan jika materi yang di
             // ajarkan sebelumnya tidak dimengerti
+            Pedagogik pd = new Pedagogik();
+            pd.updateWeakWithoutPosttest(userID, newIdCourse, lastIdCourse);
           
         %>
-            <jsp:forward page="PagePostTestReport.jsp">
-                   <jsp:param name="data"  value="<%=userID %>" />
-                </jsp:forward>  
+            <jsp:forward page="PagePostTestReport_STC.jsp">
+                <jsp:param name="data"  value="<%=userID %>" />
+            </jsp:forward>  
         <% }else if (result.equals("doubt")){
-            dataLesson.addCourseMaterial(idLearning, userID, idLesson, true);
+            dataLesson.addCourseMaterial(newIdCourse, userID, idLesson, true);
         %>
           <jsp:forward page="PagePostTest_STC.jsp">
               <jsp:param name="count"  value="<%=1%>" />

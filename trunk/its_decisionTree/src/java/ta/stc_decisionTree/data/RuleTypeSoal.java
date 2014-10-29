@@ -95,7 +95,22 @@ public class RuleTypeSoal {
         listTypeSoal.add(SOAL_TYPE_14);
         listTypeSoal.add(SOAL_TYPE_15);
         return listTypeSoal;
-    } 
+    }
+    
+    public final static LinkedList<Integer> getTypeSoal(String namaMateri){
+        LinkedList<String[]> listTypeSoal = LIST_TYPE_SOAL();
+        LinkedList<Integer> typeSoal = new LinkedList<>();
+        for(int i=0;i<listTypeSoal.size();i++){
+            String[] materiList = listTypeSoal.get(i);
+            for(int j=0;j<materiList.length;j++){
+                if(namaMateri.equalsIgnoreCase(materiList[j])){
+                    typeSoal.add(i+1);
+                    break;
+                }
+            }
+        }
+        return typeSoal;
+    }
 }
 
 /*

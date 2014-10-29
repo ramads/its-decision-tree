@@ -88,33 +88,35 @@
                         </table>
                     </form>
                 </div>
-                 <div class="guideAngel">   
-                          <div id="angelFace"></div>
-                           <div id="angleGuidance">
-                               <%
-                                   Pedagogik pedagogik = new Pedagogik();
+                <div class="guideAngel">   
+                    <div id="angelFace"></div>
+                    <div id="angleGuidance">
+                    <%
+                        Pedagogik pedagogik = new Pedagogik();
                                    
-                                   //lakukan update weak material setelah posttest
-                                   pedagogik.updateWeakMaterial(userID);
-                                   
-                                   //ambil materi yang akan dipelajari selanjutnya berdasarkan hasil posttest
-                                   String nextMaterial=pedagogik.getLearnMaterial(userID);
-                               %>
-                                   Dari Hasil Posttest Anda Lemah Pada Materi Mengenai :
-                               <%  ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
-                            if(rs2!=null){
-                                String weakMaterial="";
-                                while(rs2.next()){ 
-                                    weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ %>
+                        //lakukan update weak material setelah posttest
+                        pedagogik.updateWeakMaterial(userID);
+                        //ambil materi yang akan dipelajari selanjutnya berdasarkan hasil posttest
+                        String nextMaterial=pedagogik.getLearnMaterial(userID);
+                    %>
+                        Dari Hasil Posttest Anda Lemah Pada Materi Mengenai :
+                    <%  ResultSet rs2 = dataLesson.selectWeakFromDB(userID,"weak");
+                        if(rs2!=null){
+                            String weakMaterial="";
+                            while(rs2.next()){ 
+                                weakMaterial= new String(rs2.getString("lesson_name")); //for(int i=0; i<dataLesson.weakNode.size(); i++){ 
+                    %>
                         <ul>
                             <li style="list-style-image: url(images/icon/warning.png)"><%= dataLesson.getTopicBaseOnLessonName(weakMaterial)%></li>
                         </ul>
-                            <% }
+                    <%      }
                                 if(weakMaterial.equals("")){
                                     out.print("(kosong)<br><br>Anda Dikatakan Telah Tamat Belajar. <h1>LULUS....!!</h1>");
                                 }else{
                                   %>
-                                  <p id="guidence" style="margin-top: 20px;"><font color="red">"Silahkan Klik "<a href="PageLesson.jsp?data=<%= dataLesson.getIdLessonName(nextMaterial) %> "><b>Belajar</b></a>"</font></p>
+                                  <p id="guidence" style="margin-top: 20px;">
+                                      <font color="red">"Silahkan Klik "<a href="PageLesson.jsp?data=<%= dataLesson.getIdLessonName(nextMaterial) %> "><b>Belajar</b></a>"</font>
+                                  </p>
                                  <%
                                 }                    
                             }if (dataPosttest.hadPostest(userID)){%>
@@ -122,32 +124,11 @@
                                 <p id="guidence">Silahkan Pilih '<b>Menu Study History</b>'<br>Untuk Melihat Progres Belajar.</p>                                   
                             <% } %>
                            </div>
+                           <div style="clear: both "></div>
                  </div>
             </div> 
-           <div style="clear: both "></div>
-            <div class="demo">
-                <p id="gotodemo"><font style="font-size: 18px;"><a href="PageDemo_Pedagogik.jsp">Klik disini </a>untuk mengetahui bagaimana cara IJPT menentukan materi yang anda tidak ketahui</font></p>   
-            </div>
-            <script type="text/javascript">
-                    function blinklink(){
-                        if (!document.getElementById('gotodemo').style.color){
-                            document.getElementById('gotodemo').style.color="black";
-                        }
-                        if (document.getElementById('gotodemo').style.color=="black"){
-                            document.getElementById('gotodemo').style.color="red";
-                        }else{
-                        document.getElementById('gotodemo').style.color="black";
-                        }
-
-                        timer=setTimeout("blinklink()",300);
-                        }
-
-                    function stoptimer(){
-                        clearTimeout(timer);
-                    }
-                    blinklink();
-                </script>
-           <div style="clear: both "></div>
+            <div style="clear: both "></div>
+            
             <div class="footer">
                 <div class="designer">
                    Copyright © 2013 siinumu 

@@ -57,11 +57,11 @@
            
            //mengecek jawaban dari user dan jawawban yang sebenarnya, hasil log jawaban user ini akan disimpan di database
            if(userAns.equals(corectAns)){
-              dataPretest.addPretestLogTest( userID+idT, userID, "pretest", Integer.parseInt(idT), Integer.parseInt(idQ), userAns, true);
+              dataPretest.addPretestLogTest( userID+idT, userID, Integer.parseInt(idT), Integer.parseInt(idQ), userAns, true);
            }else {
               if(userAns.equals("")) userAns="x"; 
               //dataPretest.pretestResult.add(idT+";"+idQ+";"+userAns+";"+"false");
-              dataPretest.addPretestLogTest( userID+idT, userID, "pretest", Integer.parseInt(idT), Integer.parseInt(idQ), userAns, false);                
+              dataPretest.addPretestLogTest( userID+idT, userID, Integer.parseInt(idT), Integer.parseInt(idQ), userAns, false);                
            }
            
            //increment variable count
