@@ -1,0 +1,6 @@
+Drop database "tugasakhir" dan "pengujian" (jika ada database "pengujian")
+1. Buat database "tugasakhir", kemudian import file "tugasakhirXXXXXX.sql" di package atau folder ta/stc_decisionTree/data
+2. Buat database "pengujian", kemudian import file "pengujian_arin.sql" di package atau folder ta/stc_decisionTree/data
+3. Pada database tugasakhir, import file "datauji_datauser.sql" dan "datauji_pretestresult.sql"
+4. Running file "Pengujian.java" yang ada pada package ta.stc_decisionTree.pengujian (sebelum runnning, pastikan password phpmyadmin dan password yg ada di aplikasi telah sama)
+5. Bandingkan hasil hasil tabel "material_observation" (lihat yang flag weak saja) masing2 user dari database pengujian dan tugasakhir

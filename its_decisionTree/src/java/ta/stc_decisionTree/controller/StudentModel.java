@@ -88,15 +88,53 @@ public class StudentModel {
     */
     private void bentukDecisionTree(){
         
+        String[] daftarMateri = {
+            NamaMateri.DASAR_JAVA, 
+            NamaMateri.KELAS_METHOD, 
+            NamaMateri.VARIABEL, 
+            NamaMateri.TIPE_DATA_OBJEK, 
+            NamaMateri.TIPE_DATA_PRIMITIF,
+            NamaMateri.ARRAY, 
+//            NamaMateri.LOGIKA, 
+            NamaMateri.OP_ARITMATIKA, 
+            NamaMateri.OP_INCREMENT_DECREMENT, 
+            NamaMateri.OP_LOGIKA,
+            NamaMateri.OP_PREDENCE, 
+            NamaMateri.OP_RELASI, 
+            NamaMateri.PERULANGAN, 
+            NamaMateri.IF_ELSE, 
+//            NamaMateri.FLOWCHART, 
+            NamaMateri.SWITCH_CASE
+        };
+        
+        String[] daftarTarget = {
+            NamaMateri.DASAR_JAVA, 
+            NamaMateri.KELAS_METHOD, 
+            NamaMateri.VARIABEL, 
+            NamaMateri.TIPE_DATA_OBJEK, 
+            NamaMateri.TIPE_DATA_PRIMITIF,
+            NamaMateri.ARRAY, 
+            NamaMateri.LOGIKA, 
+            NamaMateri.OP_ARITMATIKA, 
+            NamaMateri.OP_INCREMENT_DECREMENT, 
+            NamaMateri.OP_LOGIKA,
+            NamaMateri.OP_PREDENCE, 
+            NamaMateri.OP_RELASI, 
+            NamaMateri.PERULANGAN, 
+            NamaMateri.IF_ELSE, 
+            NamaMateri.FLOWCHART, 
+            NamaMateri.SWITCH_CASE
+        };
+        
         // instansisasi objek Pelatihan
         //objek pelatihan ini digunakan untuk membangun decision tree
         Pelatihan pLatih = new Pelatihan();
         
         //set daftar materi non target
-        pLatih.setDaftarMateri((LinkedList<String>) arrayToLinkedList(NamaMateri.LIST_NAMA_MATERI));
+        pLatih.setDaftarMateri((LinkedList<String>) arrayToLinkedList(daftarMateri));
         
         //set daftar materi yang akan dijadikan sebagai target
-        pLatih.setDaftarTarget((LinkedList<String>) arrayToLinkedList(NamaMateri.LIST_NAMA_MATERI));
+        pLatih.setDaftarTarget((LinkedList<String>) arrayToLinkedList(daftarMateri));
         
         //memanggil fungsi bentukDecisionTree yang ada pada objek pelatihan dengan diberikan 
         //parameter objek ProsesTes (objek proses tes digunakan untuk memetakan)

@@ -1,6 +1,7 @@
 package ta.stc_decisionTree.controller;
 
 import java.util.LinkedList;
+import ta.stc_decisionTree.data.RuleMateriInference;
 import ta.stc_decisionTree.model.DecisionTree;
 import ta.stc_decisionTree.model.MateriInference;
 import ta.stc_decisionTree.model.TabelTree;
@@ -16,7 +17,7 @@ public class Pelatihan {
     //daftar atribut materi (atribut target dan non target)
     LinkedList<String> daftarMateri;
     
-    LinkedList<MateriInference> materiInference;
+    MateriInference[] materiInference;
     //objek untuk memproses tabel tree
     ProsesTabelTree pTree;
     
@@ -34,12 +35,12 @@ public class Pelatihan {
         this.daftarMateri = daftarMateri;
     }
     
-    public void setMateriInference(LinkedList<MateriInference> mi){
+    public void setMateriInference(MateriInference[] mi){
         materiInference = mi;
     }
     
     /**
-     * fungsi untuk mendapatkan decision tree yang dibentuk
+     * fungsi untuk mendapatkan decision tree yang dibentuk dengan tidak memperhatikan keterkaitan antar feature (materi)
      * tanpa menggunakan keterkaitan antar materi (semua materi digunakan sebagai atribut)
      * @param prosesTes hasil tes dari mahasiswa yang didapat dari workshop harian
      * @return daftar decision tree sebanyak target yang ditentukan
@@ -76,7 +77,8 @@ public class Pelatihan {
      * @param prosesTes
      * @return 
      */
-    public LinkedList<DecisionTree> buatDecisionTreeInference(ProsesTes prosesTes){
+    public LinkedList<DecisionTree> bentukDecisionTreeInference(ProsesTes prosesTes){
+        setMateriInference(RuleMateriInference.getMateriInference);
         LinkedList<DecisionTree> daftarDTree = new LinkedList<>();
         pTree = new ProsesTabelTree(prosesTes.ambilHasilTes());
         for(MateriInference mInference : materiInference){
