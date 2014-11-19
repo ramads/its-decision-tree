@@ -108,14 +108,13 @@ public class Pretest {
      * membuat log/menyimpan hasil jawaban user ke database
      * @param idpretest -> id pretest user
      * @param id -> 
-     * @param flag -> sebagai penanda apakah log untuk pretest atau posttest
      * @param idtype
      * @param idquest
      * @param userAns
      * @param result 
      */
     public void addPretestLogTest(String idpretest, String id, int idtype, int  idquest, String userAns, boolean result){
-        String query= "insert into "+Database.Table.TABLE_PRETEST_RESULT+" (idpretest, iduser, flag, idtype, idquest, userAns, result) "+ "Values(?,?,?,?,?,?,?)";
+        String query= "insert into "+Database.Table.TABLE_PRETEST_RESULT+" (idpretest, iduser, idtype, idquest, userAns, result) "+ "Values(?,?,?,?,?,?)";
         q.insertToDB(idpretest,"string",id, "string", idtype, "int", idquest, "int", userAns, "string", result, "boolean", query);
     }
     
